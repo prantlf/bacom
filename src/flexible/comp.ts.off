@@ -1,0 +1,70 @@
+import { render } from './render'
+
+export const created = Symbol('created')
+const rendered = Symbol('rendered')
+
+export interface CustomElement extends HTMLElement {
+  [created]: boolean
+  [rendered]: boolean
+  updating: Promise<void> | undefined
+  observedAttributes: string[]
+  attributeChangedCallback?(name: string, oldValue: string, newValue: string): void
+  connectedCallback?(): void
+  initialize?(): void
+  render(): HTMLElement | SVGElement | DocumentFragment
+  requestUpdate(): Promise<void>
+}
+
+export interface Comp {
+  tag: string
+  shadow?: boolean,
+  updateSync?: boolean
+}
+
+export function comp({ tag, shadow, updateSync }: Comp): any {
+  return <T extends new(...args: any[]) => CustomElement>(ctor: T) => {
+    class Comp extends ctor {
+      constructor(...args: any[]) {
+        super()
+        if (shadow) this.attachShadow({ mode: 'open' });
+        if (super.initialize) super.initialize()
+        this[created] = true
+      }
+
+      attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
+        if (oldValue !== newValue) (this as any)[name] = newValue;
+        if (super.attributeChangedCallback) super.attributeChangedCallback(name, oldValue, newValue)
+      }
+
+      connectedCallback(): void {
+        if (!this[rendered]) {
+          this[rendered] = true
+          this.requestUpdate()
+        }
+        if (super.connectedCallback) super.connectedCallback()
+      }
+
+      requestUpdate(): Promise<void> {
+        if (updateSync) {
+          this.update()
+        }
+        let updating = this.updating
+        if (!updating) {
+          updating = this.updating = Promise.resolve().then(() => {
+            this.updating = undefined
+            this.update()
+          })
+        }
+        return updating
+      }
+
+      update(): void {
+        render(shadow ? this.shadowRoot : this, super.render())
+      }
+    }
+
+    customElements.define(tag, Comp)
+
+    return Comp
+  }
+}

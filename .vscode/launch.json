@@ -1,0 +1,25 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "test",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/test/index.js",
+      "preLaunchTask": "pretest",
+      "sourceMaps": true,
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js",
+        "${workspaceFolder}/test/comp.test.js",
+        "${workspaceFolder}/test/prop.test.js"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "trace": true
+    }
+  ]
+}

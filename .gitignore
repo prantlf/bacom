@@ -1,0 +1,8 @@
+.DS_Store
+coverage
+dist
+node_modules
+test/comp.test.js
+test/prop.test.js
+test/example/*.js
+*.map

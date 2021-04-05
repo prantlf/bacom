@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "jsxFactory": "createEl",
+    "jsxFragmentFactory": "DocumentFragment",
+    "sourceMap": true
+  }
+}

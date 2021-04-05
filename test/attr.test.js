@@ -1,0 +1,39 @@
+const test = require('@prantlf/baretest')('attr')
+const assert = require('assert')
+require('./dom/dom-globals')
+const { attr } = require('..')
+
+test('remove an attribute', () => {
+  const el = document.createElement('div')
+  el.setAttribute('test', 1)
+  attr(el, 'test', null)
+  assert.ok(!el.hasAttribute('test'))
+})
+
+test('remove a boolean attribute', () => {
+  const el = document.createElement('div')
+  el.setAttribute('test', 1)
+  attr(el, 'test', false)
+  assert.ok(!el.hasAttribute('test'))
+})
+
+test('set a boolean attribute', () => {
+  const el = document.createElement('div')
+  attr(el, 'test', true)
+  assert.strictEqual(el.getAttribute('test'), '')
+})
+
+test('set a numeric attribute', () => {
+  const el = document.createElement('div')
+  attr(el, 'test', 1)
+  assert.strictEqual(el.getAttribute('test'), '1')
+})
+
+test('set a textual attribute', () => {
+  const el = document.createElement('div')
+  attr(el, 'test', '1')
+  assert.strictEqual(el.getAttribute('test'), '1')
+})
+
+if (module === require.main) test.run()
+else module.exports = test

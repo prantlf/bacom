@@ -1,0 +1,81 @@
+{
+  "name": "bacom",
+  "version": "0.0.1",
+  "description": "Basic library for writing web components.",
+  "homepage": "https://github.com/prantlf/bacom#readme",
+  "author": {
+    "name": "Ferdinand Prantl",
+    "email": "prantlf@gmail.com",
+    "url": "http://prantl.tk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prantlf/bacom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prantlf/bacom/issues"
+  },
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/prantlf/bacom/blob/master/LICENSE"
+    }
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "tools/style"
+  ],
+  "scripts": {
+    "prepare": "node tools/build dist && tsc --t es2019 --emitDeclarationOnly --declaration --outDir dist src/index.ts && rm dist/memoize.d.ts",
+    "build": "node tools/build dist",
+    "watch": "node tools/build watch",
+    "precheck": "node tools/build test",
+    "check": "node test",
+    "pretest": "node tools/build test",
+    "test": "c8 node -r source-map-support/register test && NO_CONSTRUCTIBLE_STYLESHEETS=1 c8 --no-clean node -r source-map-support/register test/comp.test && c8 report -r text-summary && c8 check-coverage",
+    "start": "python -m SimpleHTTPServer"
+  },
+  "c8": {
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/*",
+      "dist/*"
+    ],
+    "reporter": [
+      "lcov"
+    ],
+    "branches": 100,
+    "lines": 100,
+    "functions": 100,
+    "statements": 100
+  },
+  "dependencies": {
+    "@rollup/pluginutils": "^4.1.0"
+  },
+  "devDependencies": {
+    "@prantlf/baretest": "^2.0.1",
+    "@prantlf/esbuild": "0.8.46",
+    "c8": "^7.6.0",
+    "dom-lite": "^20.2.0",
+    "janadom": "^0.1.2",
+    "source-map-support": "^0.5.19",
+    "typescript": "^4.2.3"
+  },
+  "keywords": [
+    "web-components",
+    "custom-elements",
+    "native",
+    "dom",
+    "node",
+    "browser"
+  ]
+}
