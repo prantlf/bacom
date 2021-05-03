@@ -1,5 +1,7 @@
 export { comp } from './comp'
 export { prop } from './prop'
+export { elem } from './elem'
+export { event, eventize } from './event'
 export { attr, dasherize } from './attr'
-export { empty, render } from './render'
 export { style } from './style'
+export { templ } from './templ'

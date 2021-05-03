@@ -5,9 +5,9 @@
 [![Dependency Status](https://david-dm.org/prantlf/bacom.svg)](https://david-dm.org/prantlf/bacom)
 [![devDependency Status](https://david-dm.org/prantlf/bacom/dev-status.svg)](https://david-dm.org/prantlf/bacom#info=devDependencies)
 
-Basic library for writing web components. Ensures standard behaviour of custom elements with shadow DOM efficiently.
+Basic library for writing lightweight web components. Suitable for low-level web components in UI libraries. Ensures standard behaviour of custom elements with shadow DOM efficiently.
 
-* Tiny size - 2.04 kB minified, 992 B gzipped.
+* Tiny size - 2.27 kB minified, 1.13 kB gzipped.
 * Consumable as ESM, UMD and CJS modules.
 * Zero dependencies.
 * Written in TypeScript.
@@ -16,19 +16,41 @@ Basic library for writing web components. Ensures standard behaviour of custom e
 ## Synopsis
 
 ```tsx
-import { comp, prop } from 'bacom' // decorators and helpers
-import style from './style.css' // import CSSStylesheet or HTMLStyleElement
+import { comp, prop, elem, event } from 'bacom' // decorators and helpers
+import style from './style.css'        // import CSSStylesheet or HTMLStyleElement
+import template from './template.html' // import HTMLTemplateElement
 
-@comp({ tag: 'greet-me': styles: [style] }) // register a custom element
+@comp({ tag: 'greet-me': styles: [style], template }) // register a custom element
 export class GreetMeElement extends HTMLElement {
   @prop({ type: 'string' }) // enable reflection to an attribute
   public name: string
+  @elem()
+  private displayName: HTMLElement
 
-  render(): HTMLElement {
-    // your preferred library to create Element or DocumentFragment
-    return <>Hello, <span class="name">{this.name}</span>!</>
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
+    this.displayName.textContent = newValue
   }
+
+  @event()
+  onClick(): void {
+    this.classList.toggle('flash')
+  }
+
+  static observedAttributes = ['name']
 }
+```
+
+template.html:
+
+```html
+Hello, <span id=displayName></span>!
+```
+
+test.html:
+
+```html
+<greet-me name=John></greet-me>
+<!-- Renders: Hello, John! -->
 ```
 
 ## Installation
@@ -53,9 +75,12 @@ If you do not want to bundle this package in your build output, you can load it 
 The following features are implemented:
 
 * Registering of the custom element.
-* Synchronising (reflection) of values of a property and attribute.
-* Rendering of the shadow DOM content delayed by a micro-task.
+* Synchronising (reflection) of values of a properties and attributes.
+* Rendering of the shadow DOM content from a template.
 * Applying common styles by constructible stylesheets or `style` elements.
+* Setting an element to a property.
+* Listening on an event.
+* Plugins for `eslint` and `rollup` to transform `css` and `html` files as functions returning `CSSStylesheet` and `HTMLTemplateElement`.
 
 ## Contributing
 

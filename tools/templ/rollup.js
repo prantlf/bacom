@@ -1,14 +1,14 @@
 import { createFilter } from '@rollup/pluginutils'
 
 export default function style({ include, exclude, module = 'bacom' } = {}) {
-  const filter = createFilter(include || ['**/*.css'], exclude)
+  const filter = createFilter(include || ['**/*.html', '**/*.thtml'], exclude)
   return {
-    name: 'bacomstyle',
+    name: 'bacomtempl',
     transform(source, id) {
       if (!filter(id)) return
       return {
-        code: `import { style } from '${module}'
-export default style(${JSON.stringify(source)})`,
+        code: `import { templ } from '${module}'
+export default templ(${JSON.stringify(source)})`,
         map: { mappings: '' }
       }
     }

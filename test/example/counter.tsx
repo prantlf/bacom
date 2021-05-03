@@ -1,31 +1,37 @@
-import { comp, prop } from '../../dist'
-import { createEl } from 'janadom'
+import { comp, prop, elem, event } from '../../dist'
 import style from './counter.css'
+import template from './counter.thtml'
 import './counter-fonts'
 
-@comp({ tag: 'test-counter', styles: [style] })
+@comp({ tag: 'test-counter', styles: [style], template })
 export class CounterElement extends HTMLElement {
   @prop({ type: 'number' })
   public count = 0
 
-  private interval
+  @elem()
+  private display: HTMLElement
+
+  private interval: NodeJS.Timeout
 
   connectedCallback(): void {
     this.start()
   }
 
-  render(): HTMLElement {
-    return <span>Count: { this.count }</span>
+  start(): void {
+    if (!this.interval) this.interval = setInterval(() => {
+      this.display.textContent = String(++this.count)
+    }, 1000)
   }
 
-  start() {
-    if (!this.interval) this.interval = setInterval(() => ++this.count, 1000)
-  }
-
-  stop() {
+  stop(): void {
     if (this.interval) {
       clearInterval(this.interval)
       this.interval = undefined
     }
+  }
+
+  @event()
+  onClick(): void {
+    this.count = 0
   }
 }

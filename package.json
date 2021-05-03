@@ -33,7 +33,8 @@
     "tools/style"
   ],
   "scripts": {
-    "prepare": "node tools/build dist && tsc --t es2019 --emitDeclarationOnly --declaration --outDir dist src/index.ts && rm dist/memoize.d.ts",
+    "build:rollup": "rollup -c && mv dist3/src/* dist3 && rm -r dist3/memoize.d.ts dist3/src dist3/test",
+    "prepare": "node tools/build dist && ./tools/typings",
     "build": "node tools/build dist",
     "watch": "node tools/build watch",
     "precheck": "node tools/build test",
@@ -64,18 +65,19 @@
   "devDependencies": {
     "@prantlf/baretest": "^2.0.1",
     "@prantlf/esbuild": "0.8.46",
+    "@rollup/plugin-typescript": "^8.2.1",
     "c8": "^7.6.0",
     "dom-lite": "^20.2.0",
-    "janadom": "^0.1.2",
+    "esbuild": "^0.11.5",
+    "rollup": "^2.44.0",
+    "rollup-plugin-esbuild": "^3.0.2",
+    "rollup-plugin-terser": "^7.0.2",
     "source-map-support": "^0.5.19",
+    "tslib": "^2.2.0",
     "typescript": "^4.2.3"
   },
   "keywords": [
     "web-components",
-    "custom-elements",
-    "native",
-    "dom",
-    "node",
-    "browser"
+    "custom-elements"
   ]
 }

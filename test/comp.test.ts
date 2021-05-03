@@ -1,7 +1,7 @@
 import suite from '@prantlf/baretest'
 import assert from 'assert'
 import { HTMLElement, ShadowRoot } from './dom/dom-globals'
-import { comp, style } from '..'
+import { comp, style, templ } from '..'
 
 const test = suite('comp')
 
@@ -29,22 +29,16 @@ test('renders an empty shadow dom by default', async () => {
   assert.strictEqual(el.shadowRoot.firstChild, null)
 })
 
-@comp({ tag: 'element-component' })
+@comp({ tag: 'element-component', template: templ('<span></span>') })
 class ElementComponent extends HTMLElement {
   constructor() {
     super('element-component') // workaround for dom-lite
-  }
-
-  render(): HTMLElement {
-    return document.createElement('span')
   }
 }
 
 test('renders component content', async () => {
   const el = document.createElement('element-component')
   document.body.appendChild(el)
-  el.connectedCallback() // workaround for dom-lite
-  await el.updateComplete
   assert.strictEqual(el.outerHTML, '<element-component></element-component>')
   assert.strictEqual(el.shadowRoot.childNodes[0].outerHTML, '<span></span>')
   document.body.removeChild(el)
@@ -54,36 +48,21 @@ test('replaces previous component content when rendering', async () => {
   const el = document.createElement('element-component')
   el.shadowRoot.appendChild(document.createElement('div'))
   document.body.appendChild(el)
-  el.connectedCallback() // workaround for dom-lite
-  await el.updateComplete
   assert.strictEqual(el.outerHTML, '<element-component></element-component>')
   assert.strictEqual(el.shadowRoot.childNodes[0].outerHTML, '<span></span>')
   document.body.removeChild(el)
 })
 
-test('does not wait for an update if none was requested', async () => {
-  const el = document.createElement('element-component')
-  await el.updateComplete
-})
-
-@comp({ tag: 'style-component', styles: [style('* { font-family: sans-serif }')] })
+@comp({ tag: 'style-component', styles: [style('* { font-family: sans-serif }')], template: templ('test') })
 class StyleComponent extends HTMLElement {
   constructor() {
     super('style-component') // workaround for dom-lite
-  }
-
-  render(): DocumentFragment {
-    const fragment = document.createDocumentFragment()
-    fragment.appendChild(document.createTextNode('test'))
-    return fragment
   }
 }
 
 test('renders component style', async () => {
   const el = document.createElement('style-component')
   document.body.appendChild(el)
-  el.connectedCallback() // workaround for dom-lite
-  await el.updateComplete
   const { adoptedStyleSheets } = el.shadowRoot
   const expectedStyle = '* { font-family: sans-serif }'
   const expectedContent = adoptedStyleSheets
@@ -98,25 +77,6 @@ test('renders component style', async () => {
     assert.strictEqual(adoptedStyleSheets.length, 1)
     assert.strictEqual(adoptedStyleSheets[0].toString(), expectedStyle)
   }
-  document.body.removeChild(el)
-})
-
-@comp({ tag: 'connected-component' })
-class ConnectedComponent extends HTMLElement {
-  constructor() {
-    super('connected-component') // workaround for dom-lite
-  }
-
-  connectedCallback() {
-    this.called = true
-  }
-}
-
-test('supports custom connectedCallback', async () => {
-  const el = document.createElement('connected-component')
-  document.body.appendChild(el)
-  el.connectedCallback() // workaround for dom-lite
-  assert.ok(el.called)
   document.body.removeChild(el)
 })
 

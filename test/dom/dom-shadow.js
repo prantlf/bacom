@@ -11,6 +11,26 @@ class ShadowRoot extends DocumentFragment {
     super()
     this.mode = mode
   }
+
+  getElementById(id) {
+    for (const child of this.childNodes) {
+      if (child instanceof HTMLElement) {
+        if (child.id === id) return child
+        const el = child.getElementById(id)
+        if (el) return el
+      }
+    }
+  }
+
+  querySelector(sel) {
+    for (const child of this.childNodes) {
+      if (child instanceof HTMLElement) {
+        if (child.id === sel.slice(1)) return child // support local tests
+        const el = child.querySelector(sel)
+        if (el) return el
+      }
+    }
+  }
 }
 
 HTMLElement.prototype.attachShadow = function({ mode }) {

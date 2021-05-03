@@ -3,6 +3,8 @@ coverage
 dist
 node_modules
 test/comp.test.js
+test/elem.test.js
+test/event.test.js
 test/prop.test.js
 test/example/*.js
 *.map

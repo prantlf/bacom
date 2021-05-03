@@ -60,7 +60,6 @@ export function prop({ type }: Prop): any {
         if (oldValue !== newValue) {
           (this as PropContainer)[propName] = newValue
           if ((this as CustomElement)[created]) attr(this, attrName, value)
-          this.requestUpdate()
         }
       }
     }

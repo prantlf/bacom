@@ -1,4 +1,5 @@
 const { Document, HTMLElement } = require('dom-lite')
+const { ShadowRoot } = require('./dom-shadow')
 const { performance } = require('perf_hooks')
 
 let now
@@ -34,7 +35,7 @@ class Event {
   defaultPrevented = false
   cancelBubble = false
   cancelImmediate = false
-  eventPhase = NONE
+  eventPhase = Event.NONE
   timeStamp = now()
 
   constructor(type, options) {
@@ -147,5 +148,6 @@ const EventTarget = {
 
 Object.assign(HTMLElement.prototype, EventTarget)
 Object.assign(Document.prototype, EventTarget)
+Object.assign(ShadowRoot.prototype, EventTarget)
 
 module.exports = { Event, CustomEvent: Event }

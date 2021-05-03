@@ -10,10 +10,18 @@ const { customElements } = require('./dom-custom')
 const { CSSStyleSheet } = require('./dom-stylesheet')
 const { Event } = require('./dom-events')
 
+const content = Symbol('content')
 class HTMLTemplateElement extends HTMLElement {
+  get content() {
+    const content = document.createDocumentFragment()
+    for (const child of this.childNodes) {
+      content.appendChild(child.cloneNode(true))
+    }
+    return content
+  }
+
   constructor() {
     super('template')
-    this.content = this // simplification for tests
   }
 }
 

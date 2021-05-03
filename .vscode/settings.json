@@ -9,6 +9,8 @@
   "search.exclude": {
     "**/dist": true,
     "test/comp.test.js": true,
+    "test/elem.test.js": true,
+    "test/event.test.js": true,
     "test/prop.test.js": true,
     "test/example/*.js": true
   }

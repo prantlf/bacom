@@ -4,7 +4,7 @@ export const constructibleStyleSheets = 'adoptedStyleSheets' in document
 
 // Delays construction of a stylesheet. Returns a function that creates the stylesheet
 // at first when it is called and remembers it to be returned in the next calls.
-const style: (style: string) => () => CSSStyleSheet | HTMLElement = constructibleStyleSheets
+const style: (style: string) => () => CSSStyleSheet | HTMLStyleElement = constructibleStyleSheets
   ? (style: string) => memoize(() => {
     const stylesheet = new CSSStyleSheet();
     (stylesheet as any).replace(style)
@@ -17,4 +17,3 @@ const style: (style: string) => () => CSSStyleSheet | HTMLElement = constructibl
   })
 
 export { style }
-
