@@ -1,8 +1,10 @@
+const { spawn } = require('child_process')
 const { startService } = require('@prantlf/esbuild')
 const style = require('./style/esbuild')
 const templ = require('./templ/esbuild')
 
 const task = process.argv[2]
+const prepare = task === 'prepare'
 const watch = task === 'watch'
 const builds = [
   {
@@ -13,7 +15,7 @@ const builds = [
   }
 ]
 
-if (task === 'dist' || watch)
+if (prepare || task === 'dist' || watch)
   builds.push(
     {
       entryPoints: ['src/index.ts'],
@@ -68,11 +70,23 @@ if (task === 'test' || watch)
     }
   )
 
-let service
-startService()
-  .then(s => {
-    service = s
-    Promise .all(builds.map(build => service.build({ ...build, sourcemap: true, watch })))
+async function build() {
+  const service = await startService()
+  try {
+    await Promise.all(builds.map(build => service.build({ ...build, sourcemap: true, watch })))
+  } finally {
+    service.stop()
+  }
+}
+
+function typings() {
+  return new Promise((resolve, reject) => {
+    const proc = spawn(`${__dirname}/typings`)
+      .on('error', err => console.error(err), reject())
+      .on('close', code => code ? reject() : resolve())
+    proc.stdout.on('data', data => process.stdout.write(data.toString()))
+    proc.stderr.on('data', data => process.stderr.write(data.toString()))
   })
-  .catch(() => process.exitCode = 1)
-  .finally(() => service && service.stop())
+}
+
+Promise.all([build(), prepare && typings()]).catch(() => process.exitCode = 1)

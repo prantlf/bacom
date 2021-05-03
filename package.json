@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "build:rollup": "rollup -c && mv dist3/src/* dist3 && rm -r dist3/memoize.d.ts dist3/src dist3/test",
-    "prepare": "node tools/build dist && ./tools/typings",
+    "prepare": "node tools/build prepare",
     "build": "node tools/build dist",
     "watch": "node tools/build watch",
     "precheck": "node tools/build test",
