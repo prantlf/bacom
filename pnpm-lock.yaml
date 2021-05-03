@@ -5,32 +5,32 @@ specifiers:
   '@prantlf/esbuild': 0.8.46
   '@rollup/plugin-typescript': ^8.2.1
   '@rollup/pluginutils': ^4.1.0
-  c8: ^7.6.0
+  c8: ^7.7.2
   dom-lite: ^20.2.0
-  esbuild: ^0.11.5
-  rollup: ^2.44.0
-  rollup-plugin-esbuild: ^3.0.2
+  esbuild: ^0.11.18
+  rollup: ^2.46.0
+  rollup-plugin-esbuild: ^4.2.3
   rollup-plugin-terser: ^7.0.2
   source-map-support: ^0.5.19
   tslib: ^2.2.0
-  typescript: ^4.2.3
+  typescript: ^4.2.4
 
 dependencies:
-  '@rollup/pluginutils': 4.1.0_rollup@2.44.0
+  '@rollup/pluginutils': 4.1.0_rollup@2.46.0
 
 devDependencies:
   '@prantlf/baretest': 2.0.1
   '@prantlf/esbuild': 0.8.46
-  '@rollup/plugin-typescript': 8.2.1_79e5e2584e1b0ed05ba05cff569eeb2f
-  c8: 7.6.0
+  '@rollup/plugin-typescript': 8.2.1_a3b54be422ec682aa2c1673acc2ace22
+  c8: 7.7.2
   dom-lite: 20.2.0
-  esbuild: 0.11.5
-  rollup: 2.44.0
-  rollup-plugin-esbuild: 3.0.2_esbuild@0.11.5+rollup@2.44.0
-  rollup-plugin-terser: 7.0.2_rollup@2.44.0
+  esbuild: 0.11.18
+  rollup: 2.46.0
+  rollup-plugin-esbuild: 4.2.3_esbuild@0.11.18+rollup@2.46.0
+  rollup-plugin-terser: 7.0.2_rollup@2.46.0
   source-map-support: 0.5.19
   tslib: 2.2.0
-  typescript: 4.2.3
+  typescript: 4.2.4
 
 packages:
 
@@ -74,7 +74,7 @@ packages:
     requiresBuild: true
     dev: true
 
-  /@rollup/plugin-typescript/8.2.1_79e5e2584e1b0ed05ba05cff569eeb2f:
+  /@rollup/plugin-typescript/8.2.1_a3b54be422ec682aa2c1673acc2ace22:
     resolution: {integrity: sha512-Qd2E1pleDR4bwyFxqbjt4eJf+wB0UKVMLc7/BAFDGVdAXQMCsD4DUv5/7/ww47BZCYxWtJqe1Lo0KVNswBJlRw==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
@@ -82,14 +82,14 @@ packages:
       tslib: '*'
       typescript: '>=3.7.0'
     dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.44.0
+      '@rollup/pluginutils': 3.1.0_rollup@2.46.0
       resolve: 1.20.0
-      rollup: 2.44.0
+      rollup: 2.46.0
       tslib: 2.2.0
-      typescript: 4.2.3
+      typescript: 4.2.4
     dev: true
 
-  /@rollup/pluginutils/3.1.0_rollup@2.44.0:
+  /@rollup/pluginutils/3.1.0_rollup@2.46.0:
     resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
     engines: {node: '>= 8.0.0'}
     peerDependencies:
@@ -98,10 +98,10 @@ packages:
       '@types/estree': 0.0.39
       estree-walker: 1.0.1
       picomatch: 2.2.2
-      rollup: 2.44.0
+      rollup: 2.46.0
     dev: true
 
-  /@rollup/pluginutils/4.1.0_rollup@2.44.0:
+  /@rollup/pluginutils/4.1.0_rollup@2.46.0:
     resolution: {integrity: sha512-TrBhfJkFxA+ER+ew2U2/fHbebhLT/l/2pRk0hfj9KusXUuRXd2v0R58AfaZK9VXDQ4TogOSEmICVrQAA3zFnHQ==}
     engines: {node: '>= 8.0.0'}
     peerDependencies:
@@ -109,14 +109,10 @@ packages:
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.2.2
-      rollup: 2.44.0
+      rollup: 2.46.0
 
   /@types/estree/0.0.39:
     resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
-    dev: true
-
-  /@types/is-windows/1.0.0:
-    resolution: {integrity: sha512-tJ1rq04tGKuIJoWIH0Gyuwv4RQ3+tIu7wQrC0MV47raQ44kIzXSSFKfrxFUOWVRvesoF7mrTqigXmqoZJsXwTg==}
     dev: true
 
   /@types/istanbul-lib-coverage/2.0.3:
@@ -165,8 +161,8 @@ packages:
     resolution: {integrity: sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==}
     dev: true
 
-  /c8/7.6.0:
-    resolution: {integrity: sha512-cQYCSepX54npWqOKAmRWwOnmN2XPyShpP3Hnw2VoaB/8fdiIke72tKClHLim4U5kSTFc1vjit0771oe+BL7qHw==}
+  /c8/7.7.2:
+    resolution: {integrity: sha512-8AqNnUMxB3hsgYCYso2GJjlwnaNPlrEEbYbCQb7N76V1nrOgCKXiTcE3gXU18rIj0FeduPywROrIBMC7XAKApg==}
     engines: {node: '>=10.12.0'}
     hasBin: true
     dependencies:
@@ -174,7 +170,6 @@ packages:
       '@istanbuljs/schema': 0.1.2
       find-up: 5.0.0
       foreground-child: 2.0.0
-      furi: 2.0.0
       istanbul-lib-coverage: 3.0.0
       istanbul-lib-report: 3.0.0
       istanbul-reports: 3.0.2
@@ -182,7 +177,7 @@ packages:
       test-exclude: 6.0.0
       v8-to-istanbul: 7.1.0
       yargs: 16.2.0
-      yargs-parser: 20.2.6
+      yargs-parser: 20.2.7
     dev: true
 
   /chalk/2.4.2:
@@ -256,8 +251,8 @@ packages:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
     dev: true
 
-  /esbuild/0.11.5:
-    resolution: {integrity: sha512-aRs6jAE+bVRp1tyfzUugAw1T/Y0Fwzp4Z2ROikF3h+UifoD5QlEbEYQGc6orNnnSIRhWR5VWBH7LozlAumaLHg==}
+  /esbuild/0.11.18:
+    resolution: {integrity: sha512-KD7v4N9b5B8bxPUNn/3GA9r0HWo4nJk3iwjZ+2zG1ffg+r8ig+wqj7sW6zgI6Sn4/B2FnbzqWxcAokAGGM5zwQ==}
     hasBin: true
     requiresBuild: true
     dev: true
@@ -308,13 +303,6 @@ packages:
 
   /function-bind/1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
-    dev: true
-
-  /furi/2.0.0:
-    resolution: {integrity: sha512-uKuNsaU0WVaK/vmvj23wW1bicOFfyqSsAIH71bRZx8kA4Xj+YCHin7CJKJJjkIsmxYaPFLk9ljmjEyB7xF7WvQ==}
-    dependencies:
-      '@types/is-windows': 1.0.0
-      is-windows: 1.0.2
     dev: true
 
   /get-caller-file/2.0.5:
@@ -374,11 +362,6 @@ packages:
   /is-fullwidth-code-point/3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
     engines: {node: '>=8'}
-    dev: true
-
-  /is-windows/1.0.2:
-    resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
-    engines: {node: '>=0.10.0'}
     dev: true
 
   /isexe/2.0.0:
@@ -521,34 +504,34 @@ packages:
       glob: 7.1.6
     dev: true
 
-  /rollup-plugin-esbuild/3.0.2_esbuild@0.11.5+rollup@2.44.0:
-    resolution: {integrity: sha512-uq+oBCeLXF1m6g9V0qpqbPbgyq24aXBKF474BvqgxfNmTP6FZ+oVk5/pCWQ/2rfSNJs4IimNU/k0q8xMaa0iCA==}
+  /rollup-plugin-esbuild/4.2.3_esbuild@0.11.18+rollup@2.46.0:
+    resolution: {integrity: sha512-GWyDUPv79Iw4uQdizD7ch7yA+wiB9W4Ye01RmO/kuF3yjybluJT5rbmLAnyv3kWmOF8suOjf+TvvBCXEj6qSAw==}
     engines: {node: '>=12'}
     peerDependencies:
-      esbuild: '>=0.9.0'
+      esbuild: '>=0.10.1'
+      rollup: ^1.20.0 || ^2.0.0
     dependencies:
-      '@rollup/pluginutils': 4.1.0_rollup@2.44.0
-      esbuild: 0.11.5
+      '@rollup/pluginutils': 4.1.0_rollup@2.46.0
+      esbuild: 0.11.18
       joycon: 3.0.1
       jsonc-parser: 3.0.0
-    transitivePeerDependencies:
-      - rollup
+      rollup: 2.46.0
     dev: true
 
-  /rollup-plugin-terser/7.0.2_rollup@2.44.0:
+  /rollup-plugin-terser/7.0.2_rollup@2.46.0:
     resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
     peerDependencies:
       rollup: ^2.0.0
     dependencies:
       '@babel/code-frame': 7.12.13
       jest-worker: 26.6.2
-      rollup: 2.44.0
+      rollup: 2.46.0
       serialize-javascript: 4.0.0
       terser: 5.6.1
     dev: true
 
-  /rollup/2.44.0:
-    resolution: {integrity: sha512-rGSF4pLwvuaH/x4nAS+zP6UNn5YUDWf/TeEU5IoXSZKBbKRNTCI3qMnYXKZgrC0D2KzS2baiOZt1OlqhMu5rnQ==}
+  /rollup/2.46.0:
+    resolution: {integrity: sha512-qPGoUBNl+Z8uNu0z7pD3WPTABWRbcOwIrO/5ccDJzmrtzn0LVf6Lj91+L5CcWhXl6iWf23FQ6m8Jkl2CmN1O7Q==}
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
@@ -664,8 +647,8 @@ packages:
     resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
     dev: true
 
-  /typescript/4.2.3:
-    resolution: {integrity: sha512-qOcYwxaByStAWrBf4x0fibwZvMRG+r4cQoTjbPtUlrWjBHbmCAww1i448U0GJ+3cNNEtebDteo/cHOR3xJ4wEw==}
+  /typescript/4.2.4:
+    resolution: {integrity: sha512-V+evlYHZnQkaz8TRBuxTA92yZBPotr5H+WhQ7bD3hZUndx5tGOa1fuCgeSjxAzM1RiN5IzvadIXTVefuuwZCRg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
@@ -705,8 +688,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /yargs-parser/20.2.6:
-    resolution: {integrity: sha512-AP1+fQIWSM/sMiET8fyayjx/J+JmTPt2Mr0FkrgqB4todtfa53sOsrSAcIrJRD5XS20bKUwaDIuMkWKCEiQLKA==}
+  /yargs-parser/20.2.7:
+    resolution: {integrity: sha512-FiNkvbeHzB/syOjIUxFDCnhSfzAL8R5vs40MgLFBorXACCOAEaWu0gRZl14vG8MR9AOJIZbmkjhusqBYZ3HTHw==}
     engines: {node: '>=10'}
     dev: true
 
@@ -720,7 +703,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.0
       y18n: 5.0.5
-      yargs-parser: 20.2.6
+      yargs-parser: 20.2.7
     dev: true
 
   /yocto-queue/0.1.0:
