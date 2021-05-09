@@ -114,7 +114,7 @@ fragment.innerHTML = '<greet-me name=John></greet-me>'
 const output = fragment.getInnerHTML({ includeShadowRoots: true })
 // Output will contain:
 // <greet-me name=John>
-//   <template shadowroot=open>Hello, <span id=display-name>John</span>!</template>
+//   <template shadowroot=open>Hello, <span id="display-name">John</span>!</template>
 // </greet-me>
 ```
 
@@ -131,7 +131,7 @@ const test = suite('prop')
 test('greets with the specified name', () => {
   const el = document.createElement('greet-me')
   el.name = 'John'
-  assert.equal(el.shadowRoot.innerHTML, 'Hello, <span id=display-name>John</span>!')
+  assert.equal(el.shadowRoot.innerHTML, 'Hello, <span id="display-name">John</span>!')
 })
 ```
 
