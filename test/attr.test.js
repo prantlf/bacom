@@ -1,6 +1,6 @@
-const test = require('@prantlf/baretest')('attr')
+const test = require('tehanu')('attr')
 const assert = require('assert')
-require('./dom/dom-globals')
+require('./dom')
 const { attr } = require('..')
 
 test('remove an attribute', () => {
@@ -34,6 +34,3 @@ test('set a textual attribute', () => {
   attr(el, 'test', '1')
   assert.strictEqual(el.getAttribute('test'), '1')
 })
-
-if (module === require.main) test.run()
-else module.exports = test

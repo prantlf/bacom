@@ -1,6 +1,6 @@
-const test = require('@prantlf/baretest')('eventize')
+const test = require('tehanu')('eventize')
 const assert = require('assert')
-require('./dom/dom-globals')
+require('./dom')
 const { eventize } = require('..')
 
 test('cuts the prefix "on"', () => {
@@ -10,6 +10,3 @@ test('cuts the prefix "on"', () => {
 test('enforces lower-case', () => {
   assert.strictEqual(eventize('Test'), 'test')
 })
-
-if (module === require.main) test.run()
-else module.exports = test

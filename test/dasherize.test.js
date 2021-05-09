@@ -1,6 +1,6 @@
-const test = require('@prantlf/baretest')('dasherize')
+const test = require('tehanu')('dasherize')
 const assert = require('assert')
-require('./dom/dom-globals')
+require('./dom')
 const { dasherize } = require('..')
 
 test('a single word', () => {
@@ -26,6 +26,3 @@ test('multiple uppercase letters at the beginning', () => {
 test('multiple uppercase letters in the middle', () => {
   assert.strictEqual(dasherize('myAMDTest'), 'my-amd-test')
 })
-
-if (module === require.main) test.run()
-else module.exports = test

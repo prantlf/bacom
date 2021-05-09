@@ -1,6 +1,6 @@
-import suite from '@prantlf/baretest'
+import suite from 'tehanu'
 import assert from 'assert'
-import { HTMLElement } from './dom/dom-globals'
+import './dom'
 import { comp, elem, templ } from '..'
 
 const test = suite('elem')
@@ -15,19 +15,18 @@ class ElemComponent extends HTMLElement {
 
   @elem({ sel: '#span' })
   public sel
-
-  constructor() {
-    super('elem-component') // workaround for dom-lite
-  }
 }
 
 test('picks elements by id or selector', async () => {
-  const el = document.createElement('elem-component')
+  const el = document.createElement('elem-component') as ElemComponent
   const span = el.shadowRoot.childNodes[0]
-  assert.strictEqual((el as any).span, span)
-  assert.strictEqual((el as any).id2, span)
-  assert.strictEqual((el as any).sel, span)
+  assert.strictEqual(el.span, span)
+  assert.strictEqual(el.id2, span)
+  assert.strictEqual(el.sel, span)
 })
 
-if (module === require.main) test.run()
-else module.exports = test
+test('accepts declarative shadow dom', async () => {
+  const el = document.createElement('div')
+  el.innerHTML = '<elem-component a=b><template shadowroot=open><span id=span></span></template></elem-component>'
+  assert.strictEqual((el.firstChild as ElemComponent).span.outerHTML, '<span id="span"></span>')
+})
