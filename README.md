@@ -11,39 +11,57 @@ Basic library for writing lightweight web components. Suitable for low-level web
 * Consumable as ESM, UMD and CJS modules.
 * Zero dependencies.
 * Written in TypeScript.
-* Tests in Node.js feasible using [dom-lite].
+* SSR and Tests in Node.js feasible using [@prantlf/dom-lite].
 
 ## Synopsis
 
-```tsx
-import { comp, prop, elem, event } from 'bacom' // decorators and helpers
-import style from './style.css'        // import CSSStylesheet or HTMLStyleElement
-import template from './template.html' // import HTMLTemplateElement
+greetme.ts:
 
-@comp({ tag: 'greet-me': styles: [style], template }) // register a custom element
+```ts
+// import decorators from `bacom`
+import { comp, prop, elem, event } from 'bacom'
+// import a function returning HTMLTemplateElement
+import template from './template.html'
+// import a function returning CSSStylesheet or HTMLStyleElement
+import style from './style.css'
+
+// register a custom element with a stylesheet and a template content
+@comp({ tag: 'greet-me': styles: [style], template })
 export class GreetMeElement extends HTMLElement {
-  @prop({ type: 'string' }) // enable reflection to an attribute
+  // reflects a property to an attribute and back, watches for changes
+  @prop({ type: 'string' })
   public name: string
+
+  // pins an element with the ID `display-name` in the rendered content
   @elem()
   private displayName: HTMLElement
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
-    this.displayName.textContent = newValue
-  }
-
+  // listens to the `click` event bubbled to the host
   @event()
   onClick(): void {
     this.classList.toggle('flash')
   }
 
-  static observedAttributes = ['name']
+  // updates the element content whenever a reflected property changes
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
+    this.displayName.textContent = newValue
+  }
 }
 ```
 
 template.html:
 
 ```html
-Hello, <span id=displayName></span>!
+Hello, <span id=display-name></span>!
+```
+
+style.css:
+
+```css
+:host {
+  --greetme-font-size: 1rem;
+  font-size: var(--greetme-font-size);
+}
 ```
 
 test.html:
@@ -51,6 +69,7 @@ test.html:
 ```html
 <greet-me name=John></greet-me>
 <!-- Renders: Hello, John! -->
+<script type=module src=dist/greetme.esm.min.js></script>
 ```
 
 ## Installation
@@ -66,21 +85,55 @@ pnpm i -D bacom
 If you do not want to bundle this package in your build output, you can load it separately on your web page before your script bundle:
 
 ```html
-<script src=https://unpkg.com/bacom@0.1.0/dist/index.umd.min.js></script>
+<script src=https://unpkg.com/bacom@0.2.0/dist/index.umd.min.js></script>
 <script src=yours/index.js></script>
 ```
+
+All named exports are available in the global object `bacom`.
 
 ## Features
 
 The following features are implemented:
 
-* Registering of the custom element.
-* Synchronising (reflection) of values of a properties and attributes.
-* Rendering of the shadow DOM content from a template.
+* Registering of the custom element with the provided tag name.
+* Synchronising values of a properties and attributes (reflection).
+* Rendering the shadow DOM content from a template.
 * Applying common styles by constructible stylesheets or `style` elements.
-* Setting an element to a property.
-* Listening on an event.
-* Plugins for `eslint` and `rollup` to transform `css` and `html` files as functions returning `CSSStylesheet` and `HTMLTemplateElement`.
+* Setting an child element to a property using an ID or an selector.
+* Listening to an event on the host element or on a child element.
+* Building with plugins for `eslint` and `rollup` to transform `css` and `html` files to functions returning `CSSStylesheet` and `HTMLTemplateElement`, including memoization for the best performance.
+
+### SSR
+
+```ts
+import '@prantlf/dom-lite/global'
+import './components/greetme'
+
+const fragment = document.createDocumentFragment()
+fragment.innerHTML = '<greet-me name=John></greet-me>'
+const output = fragment.getInnerHTML({ includeShadowRoots: true })
+// Output will contain:
+// <greet-me name=John>
+//   <template shadowroot=open>Hello, <span id=display-name>John</span>!</template>
+// </greet-me>
+```
+
+### Test
+
+```js
+import '@prantlf/dom-lite/global'
+import './components/greetme'
+import suite from 'tehanu'
+import assert from 'assert'
+
+const test = suite('prop')
+
+test('greets with the specified name', () => {
+  const el = document.createElement('greet-me')
+  el.name = 'John'
+  assert.equal(el.shadowRoot.innerHTML, 'Hello, <span id=display-name>John</span>!')
+})
+```
 
 ## Contributing
 
@@ -92,4 +145,4 @@ Copyright (c) 2021 Ferdinand Prantl
 
 Licensed under the MIT license.
 
-[dom-lite]: https://github.com/litejs/dom-lite#readme
+[@prantlf/dom-lite]: https://github.com/prantlf/dom-lite#readme

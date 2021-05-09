@@ -65,13 +65,17 @@ export function comp({ tag, styles, template }: Comp): any {
   return <T extends new(...args: any[]) => CustomElement>(ctor: T) => {
     class Comp extends ctor {
       constructor(...args: any[]) {
-        super()
-        this.attachShadow({ mode: 'open' })
-        const shadowRoot = this.shadowRoot
-        if (styleCount) applyStyle(shadowRoot)
-        if (template) {
-          appendClone(shadowRoot, template().content)
-          pickElements.call(this, childEls, shadowRoot)
+        super(...args)
+        let shadowRoot = this.shadowRoot
+        if (!shadowRoot) {
+          shadowRoot = this.attachShadow({ mode: 'open' })
+          if (styleCount) applyStyle(shadowRoot)
+          if (template) {
+            appendClone(shadowRoot, template().content)
+            pickElements.call(this, childEls, shadowRoot)
+          }
+        } else {
+          if (template) pickElements.call(this, childEls, shadowRoot)
         }
         startListening.call(this, evts, shadowRoot)
         this[created] = true

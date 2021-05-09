@@ -1,5 +1,9 @@
 # Changes
 
+## 0.2.0
+
+* Recognise custom elements created with the declarative Shadow DOM.
+
 ## 0.1.0
 
 * Remove automatic re-rendering on a property change.
