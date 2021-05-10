@@ -70,8 +70,8 @@
     "@prantlf/esbuild": "^0.8.46",
     "c8": "^7.7.2",
     "source-map-support": "^0.5.19",
-    "tehanu": "^0.0.1",
-    "tehanu-repo-coco": "^0.0.1",
+    "tehanu": "^0.0.2",
+    "tehanu-repo-coco": "^0.0.2",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4"
   },

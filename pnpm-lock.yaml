@@ -6,8 +6,8 @@ specifiers:
   '@rollup/pluginutils': ^4.1.0
   c8: ^7.7.2
   source-map-support: ^0.5.19
-  tehanu: ^0.0.1
-  tehanu-repo-coco: ^0.0.1
+  tehanu: ^0.0.2
+  tehanu-repo-coco: ^0.0.2
   tslib: ^2.2.0
   typescript: ^4.2.4
 
@@ -19,8 +19,8 @@ devDependencies:
   '@prantlf/esbuild': 0.8.46
   c8: 7.7.2
   source-map-support: 0.5.19
-  tehanu: 0.0.1
-  tehanu-repo-coco: 0.0.1
+  tehanu: 0.0.2
+  tehanu-repo-coco: 0.0.2
   tslib: 2.2.0
   typescript: 4.2.4
 
@@ -387,12 +387,14 @@ packages:
       has-flag: 4.0.0
     dev: true
 
-  /tehanu-repo-coco/0.0.1:
-    resolution: {integrity: sha512-lJcYnjqMnTzHdQglgBipYwFLh2vTHW8Kdn8BiVGR6p8zaj06wTKsZFPzAnm0J6fZ0VaGgs0e1RgHCQu/0egIOw==}
+  /tehanu-repo-coco/0.0.2:
+    resolution: {integrity: sha512-99Y75UlW/pUGpXgSLiFQba2m6xXyVm9cUcMwki9XCjKA5//Lb44LGnSRijBWbzbIvMbgsFX3tyEV49wb3xlgNQ==}
+    engines: {node: '>=12'}
     dev: true
 
-  /tehanu/0.0.1:
-    resolution: {integrity: sha512-p95K/C/uENezHkfv64oge7SOSRbtcStHcjriXPcTbOYsf/TvC38h6q36RIz0kB5Z1OFc23kSh90PICaT/nFrag==}
+  /tehanu/0.0.2:
+    resolution: {integrity: sha512-uAcc83b30T0LD5Ifnt4e914zqS7DONp+25hYxhLNYNUlT4cWAesluam84I/5ED9qM0o0nsVqaMX6Jy6zjBDB0g==}
+    engines: {node: '>=12'}
     dev: true
 
   /test-exclude/6.0.0:
