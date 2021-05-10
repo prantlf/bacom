@@ -32,24 +32,25 @@ test('accepts declarative shadow dom', async () => {
   assert.strictEqual((el.firstChild as HTMLElement).shadowRoot.innerHTML, '<hr>')
 })
 
+@comp({ tag: 'render-component' })
+class RenderComponent extends HTMLElement {
+  render(): void {
+    this.shadowRoot.innerHTML = '<span></span>'
+  }
+}
+
+test('supports custom rendering method', async () => {
+  const el = document.createElement('render-component')
+  assert.strictEqual(el.shadowRoot.innerHTML, '<span></span>')
+})
+
 @comp({ tag: 'element-component', template: templ('<span></span>') })
 class ElementComponent extends HTMLElement {}
 
 test('renders component content', async () => {
   const el = document.createElement('element-component')
-  document.body.appendChild(el)
   assert.strictEqual(el.outerHTML, '<element-component></element-component>')
   assert.strictEqual((el.shadowRoot.childNodes[0] as HTMLElement).outerHTML, '<span></span>')
-  document.body.removeChild(el)
-})
-
-test('replaces previous component content when rendering', async () => {
-  const el = document.createElement('element-component')
-  el.shadowRoot.appendChild(document.createElement('div'))
-  document.body.appendChild(el)
-  assert.strictEqual(el.outerHTML, '<element-component></element-component>')
-  assert.strictEqual((el.shadowRoot.childNodes[0] as HTMLElement).outerHTML, '<span></span>')
-  document.body.removeChild(el)
 })
 
 @comp({ tag: 'style-component',
@@ -59,7 +60,6 @@ class StyleComponent extends HTMLElement {}
 
 test('renders component style', async () => {
   const el = document.createElement('style-component')
-  document.body.appendChild(el)
   const { adoptedStyleSheets } = el.shadowRoot as any
   const expectedStyle = '* { font-family: sans-serif }'
   const expectedContent = adoptedStyleSheets
@@ -74,5 +74,4 @@ test('renders component style', async () => {
     assert.strictEqual(adoptedStyleSheets.length, 1)
     assert.strictEqual(adoptedStyleSheets[0].toString(), expectedStyle)
   }
-  document.body.removeChild(el)
 })

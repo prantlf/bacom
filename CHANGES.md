@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.0
+
+* Support a custom rendering method if no template for the custom element was provided.
+
 ## 0.2.0
 
 * Recognise custom elements created with the declarative Shadow DOM.

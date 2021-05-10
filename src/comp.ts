@@ -9,6 +9,7 @@ export interface CustomElement extends HTMLElement {
   [children]: { [key: string]: ElemDecl }
   [events]: { [key: string]: EventDecl }
   observedAttributes?: string[]
+  render?(): void
   attributeChangedCallback?(name: string, oldValue: string, newValue: string): void
 }
 
@@ -70,13 +71,10 @@ export function comp({ tag, styles, template }: Comp): any {
         if (!shadowRoot) {
           shadowRoot = this.attachShadow({ mode: 'open' })
           if (styleCount) applyStyle(shadowRoot)
-          if (template) {
-            appendClone(shadowRoot, template().content)
-            pickElements.call(this, childEls, shadowRoot)
-          }
-        } else {
-          if (template) pickElements.call(this, childEls, shadowRoot)
+          if (template) appendClone(this.shadowRoot, template().content)
+          if (super.render) super.render()
         }
+        pickElements.call(this, childEls, shadowRoot)
         startListening.call(this, evts, shadowRoot)
         this[created] = true
       }

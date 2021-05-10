@@ -26,7 +26,7 @@ import template from './template.html'
 import style from './style.css'
 
 // register a custom element with a stylesheet and a template content
-@comp({ tag: 'greet-me': styles: [style], template })
+@comp({ tag: 'greet-me', styles: [style], template })
 export class GreetMeElement extends HTMLElement {
   // reflects a property to an attribute and back, watches for changes
   @prop({ type: 'string' })
@@ -85,7 +85,7 @@ pnpm i -D bacom
 If you do not want to bundle this package in your build output, you can load it separately on your web page before your script bundle:
 
 ```html
-<script src=https://unpkg.com/bacom@0.2.0/dist/index.umd.min.js></script>
+<script src=https://unpkg.com/bacom@0.3.0/dist/index.umd.min.js></script>
 <script src=yours/index.js></script>
 ```
 
@@ -102,6 +102,33 @@ The following features are implemented:
 * Setting an child element to a property using an ID or an selector.
 * Listening to an event on the host element or on a child element.
 * Building with plugins for `eslint` and `rollup` to transform `css` and `html` files to functions returning `CSSStylesheet` and `HTMLTemplateElement`, including memoization for the best performance.
+
+### Custom Rendering
+
+If you do not pass a template as a parameter to the `comp` decorator, you can implement the `render` method to populate the shadow DOM yourself. You will still be able to use the decorators `elem` and `event` and refer to the Shadow DOM content.
+
+```ts
+import { comp, prop, elem } from 'bacom'
+
+@comp({ tag: 'greet-me' })
+export class GreetMeElement extends HTMLElement {
+  @prop({ type: 'string' })
+  public name: string
+
+  @elem()
+  private displayName: HTMLElement
+
+  render(): void {
+    this.shadowRoot = 'Hello, <span id=display-name></span>!
+  }
+
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
+    this.displayName.textContent = newValue
+  }
+}
+```
+
+If you implement the `render` method, it will be called even if you pass the `template` parameter to the `comp` decorator. You can use it to update the Shadom DOM content.
 
 ### SSR
 
