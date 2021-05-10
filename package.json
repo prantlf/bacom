@@ -41,7 +41,7 @@
     "build": "node tools/build dist",
     "watch": "node tools/build watch",
     "precheck": "node tools/build test",
-    "check": "node test",
+    "check": "node -r source-map-support/register test",
     "pretest": "node tools/build test",
     "test": "c8 node -r source-map-support/register test && NO_CONSTRUCTIBLE_STYLESHEETS=1 c8 --no-clean node -r source-map-support/register test/comp.test && c8 report -r text-summary && c8 check-coverage",
     "start": "python -m SimpleHTTPServer"
@@ -66,11 +66,11 @@
     "@rollup/pluginutils": "^4.1.0"
   },
   "devDependencies": {
-    "@prantlf/dom-lite": "^21.2.6",
+    "@prantlf/dom-lite": "^21.2.8",
     "@prantlf/esbuild": "^0.8.46",
     "c8": "^7.7.2",
     "source-map-support": "^0.5.19",
-    "tehanu": "^0.0.2",
+    "tehanu": "^0.0.3",
     "tehanu-repo-coco": "^0.0.2",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4"
