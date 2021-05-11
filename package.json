@@ -33,10 +33,10 @@
   },
   "files": [
     "dist",
-    "tools/style"
+    "tools/style",
+    "tools/templ"
   ],
   "scripts": {
-    "build:rollup": "rollup -c && mv dist3/src/* dist3 && rm -r dist3/memoize.d.ts dist3/src dist3/test",
     "prepare": "node tools/build prepare",
     "build": "node tools/build dist",
     "watch": "node tools/build watch",
@@ -72,7 +72,6 @@
     "source-map-support": "^0.5.19",
     "tehanu": "^0.0.3",
     "tehanu-repo-coco": "^0.0.2",
-    "tslib": "^2.2.0",
     "typescript": "^4.2.4"
   },
   "keywords": [

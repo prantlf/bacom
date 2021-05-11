@@ -8,7 +8,6 @@ specifiers:
   source-map-support: ^0.5.19
   tehanu: ^0.0.3
   tehanu-repo-coco: ^0.0.2
-  tslib: ^2.2.0
   typescript: ^4.2.4
 
 dependencies:
@@ -21,7 +20,6 @@ devDependencies:
   source-map-support: 0.5.19
   tehanu: 0.0.3
   tehanu-repo-coco: 0.0.2
-  tslib: 2.2.0
   typescript: 4.2.4
 
 packages:
@@ -404,10 +402,6 @@ packages:
       '@istanbuljs/schema': 0.1.2
       glob: 7.1.6
       minimatch: 3.0.4
-    dev: true
-
-  /tslib/2.2.0:
-    resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
     dev: true
 
   /typescript/4.2.4:

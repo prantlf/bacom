@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.1
+
+* Add missing export - tools/templ.
+
 ## 0.3.0
 
 * Support a custom rendering method if no template for the custom element was provided.
