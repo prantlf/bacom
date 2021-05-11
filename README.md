@@ -139,9 +139,9 @@ import './components/greetme'
 const fragment = document.createDocumentFragment()
 fragment.innerHTML = '<greet-me name=John></greet-me>'
 const output = fragment.getInnerHTML({ includeShadowRoots: true })
-// Output will contain:
+// The output will contain:
 // <greet-me name=John>
-//   <template shadowroot=open>Hello, <span id="display-name">John</span>!</template>
+//   <template shadowroot="open">Hello, <span id="display-name">John</span>!</template>
 // </greet-me>
 ```
 
