@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+./node_modules/.bin/tsc --target es2019 --experimentalDecorators \
+  --emitDeclarationOnly --declaration --declarationDir dist src/index.ts
+rm dist/memoize.d.ts

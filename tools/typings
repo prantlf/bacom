@@ -1,4 +1,0 @@
-#!/bin/sh
-
-./node_modules/.bin/tsc --t es2019 --emitDeclarationOnly --declaration --outDir dist src/index.ts
-rm dist/memoize.d.ts

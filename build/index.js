@@ -1,7 +1,7 @@
 const { spawn } = require('child_process')
 const { startService } = require('@prantlf/esbuild')
-const style = require('./style/esbuild')
-const templ = require('./templ/esbuild')
+const style = require('../tools/style/esbuild')
+const templ = require('../tools/templ/esbuild')
 
 const task = process.argv[2]
 const prepare = task === 'prepare'
@@ -86,9 +86,9 @@ async function build() {
   }
 }
 
-function typings() {
+function types() {
   return new Promise((resolve, reject) => {
-    const proc = spawn(`${__dirname}/typings`)
+    const proc = spawn(`${__dirname}/types`)
       .on('error', err => (console.error(err), reject()))
       .on('exit', code => code ? reject() : resolve())
     proc.stdout.on('data', data => process.stdout.write(data.toString()))
@@ -96,4 +96,4 @@ function typings() {
   })
 }
 
-Promise.all([build(), prepare && typings()]).catch(() => process.exitCode = 1)
+Promise.all([build(), prepare && types()]).catch(() => process.exitCode = 1)
