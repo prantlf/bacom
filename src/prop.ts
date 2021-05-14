@@ -48,6 +48,7 @@ export function prop({ type }: Prop): any {
     const convert: Converter = converters[type];
 
     return {
+      configurable: true,
       enumerable: true,
 
       get() {
