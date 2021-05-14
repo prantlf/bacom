@@ -26,23 +26,23 @@
     "node": ">=12"
   },
   "main": "dist/index.js",
-  "module": "dist/index.esm.min.js",
+  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "browser": {
-    "dist/index.js": "dist/index.umd.min.js"
+    "dist/index.js": "dist/index.umd.min.js",
+    "dist/index.esm.js": "dist/index.esm.min.js"
   },
   "files": [
     "dist",
-    "tools/style",
-    "tools/templ"
+    "tools"
   ],
   "scripts": {
-    "prepare": "node tools/build prepare",
-    "build": "node tools/build dist",
-    "watch": "node tools/build watch",
-    "precheck": "node tools/build test",
+    "prepare": "node build prepare",
+    "build": "node build dist",
+    "watch": "node build watch",
+    "precheck": "node build test",
     "check": "node -r source-map-support/register test",
-    "pretest": "node tools/build test",
+    "pretest": "node build test",
     "test": "c8 node -r source-map-support/register test && NO_CONSTRUCTIBLE_STYLESHEETS=1 c8 --no-clean node -r source-map-support/register test/comp.test && c8 report -r text-summary && c8 check-coverage",
     "start": "python -m SimpleHTTPServer"
   },
@@ -63,7 +63,14 @@
     "statements": 100
   },
   "dependencies": {
-    "@rollup/pluginutils": "^4.1.0"
+    "@rollup/pluginutils": "^4.1.0",
+    "clean-css": "^5.1.2",
+    "cssnano": "^5.0.2",
+    "csso": "^4.2.0",
+    "html-minifier": "^4.0.0",
+    "htmlnano": "^1.0.0",
+    "postcss": "^8.2.15",
+    "source-map": "^0.7.3"
   },
   "devDependencies": {
     "@prantlf/dom-lite": "^21.2.8",

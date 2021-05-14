@@ -1,5 +1,11 @@
 # Changes
 
+## 0.4.0
+
+* Minify CSS and HTML bundled by esbuild and rollup plugins.
+* Cache once minified files, in case the bundler asks for the same file again.
+* Make reflection properties configurable.
+
 ## 0.3.1
 
 * Add missing export - tools/templ.

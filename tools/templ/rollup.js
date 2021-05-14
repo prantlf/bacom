@@ -1,16 +1,19 @@
-import { createFilter } from '@rollup/pluginutils'
+const { createFilter } = require('@rollup/pluginutils')
+const compileHtml = require('./compile')
+const cachify = require('../_shared/cachify')
 
-export default function style({ include, exclude, module = 'bacom' } = {}) {
-  const filter = createFilter(include || ['**/*.html', '**/*.thtml'], exclude)
+const cache = new Map()
+
+module.exports = function
+templ({ include = ['**/*.html', '**/*.thtml'], exclude, minify, module = 'bacom' } = {}) {
+  const filter = createFilter(include, exclude)
   return {
     name: 'bacomtempl',
     transform(source, id) {
-      if (!filter(id)) return
-      return {
-        code: `import { templ } from '${module}'
-export default templ(${JSON.stringify(source)})`,
-        map: { mappings: '' }
-      }
+      return filter(id) && cachify(cache, `${id}:${minify}`, async () => {
+        const { code, map } = await compileHtml(id, source, minify, module)
+        return { code, map: map.toJSON() }
+      })
     }
   }
 }

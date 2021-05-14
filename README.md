@@ -85,7 +85,7 @@ pnpm i -D bacom
 If you do not want to bundle this package in your build output, you can load it separately on your web page before your script bundle:
 
 ```html
-<script src=https://unpkg.com/bacom@0.3.0/dist/index.umd.min.js></script>
+<script src=https://unpkg.com/bacom@0.4.0/dist/index.umd.min.js></script>
 <script src=yours/index.js></script>
 ```
 
@@ -102,6 +102,71 @@ The following features are implemented:
 * Setting an child element to a property using an ID or an selector.
 * Listening to an event on the host element or on a child element.
 * Building with plugins for `eslint` and `rollup` to transform `css` and `html` files to functions returning `CSSStylesheet` and `HTMLTemplateElement`, including memoization for the best performance.
+
+### Build
+
+If you want to keep stylesheets and templates inm separate `.css` and `.html` files instead of keeping the in strings in the script code, you will need bundler plugins.
+
+Plugins for [Rollup]:
+
+```js
+import typescript from '@rollup/plugin-typescript'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
+import { terser } from 'rollup-plugin-terser'
+import sourcemaps from 'rollup-plugin-sourcemaps'
+import style from 'bacom/tools/style/rollup'
+import templ from 'bacom/tools/templ/rollup'
+
+export default [
+  {
+    input: 'src/index.ts',
+    output: [{
+      file: 'dist/index.min.js',
+      format: 'esm',
+      sourcemap: true
+    }],
+    plugins: [
+      nodeResolve(), style({ minify: true }), templ({ minify: true }),
+      typescript(), sourcemaps(), terser()
+    ]
+  },
+  {
+    input: 'test/index.ts',
+    output: [{
+      file: 'test/index.js',
+      format: 'cjs',
+      sourcemap: true
+    }],
+    plugins: [nodeResolve(), style(), templ(), typescript(), sourcemaps()],
+    external: ['bacom', 'tehanu', '@prantlf/dom-lite/global']
+  }
+]
+```
+
+Plugins for [esbuild]:
+
+```js
+const { build } = require('esbuild')
+const style = require('bacom/tools/style/esbuild')
+const templ = require('bacom/tools/templ/esbuild')
+
+const targets = [
+  {
+    entryPoints: ['src/index.ts'],
+    outfile: 'dist/index.min.js',
+    format: 'esm', sourcemap: true, bundle: true, minify: true,
+    plugins: [style({ minify: true }), templ({ minify: true })]
+  },
+  {
+    entryPoints: ['test/index.test.ts'],
+    outfile: 'test/index.test.js',
+    format: 'cjs', sourcemap: true, bundle: true, platform: 'node',
+    external: ['bacom', 'tehanu', '@prantlf/dom-lite']
+  }
+]
+
+Promise.all(targets.map(build)).catch(() => process.exitCode = 1)
+```
 
 ### Custom Rendering
 
@@ -173,3 +238,5 @@ Copyright (c) 2021 Ferdinand Prantl
 Licensed under the MIT license.
 
 [@prantlf/dom-lite]: https://github.com/prantlf/dom-lite#readme
+[Rollup]: https://rollupjs.org/
+[esbuild]: https://esbuild.github.io/
