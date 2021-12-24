@@ -121,9 +121,7 @@ export default [
   {
     input: 'src/index.ts',
     output: [{
-      file: 'dist/index.min.js',
-      format: 'esm',
-      sourcemap: true
+      file: 'dist/index.min.js', format: 'esm', sourcemap: true
     }],
     plugins: [
       nodeResolve(), style({ minify: true }), templ({ minify: true }),
@@ -133,9 +131,7 @@ export default [
   {
     input: 'test/index.ts',
     output: [{
-      file: 'test/index.js',
-      format: 'cjs',
-      sourcemap: true
+      file: 'test/index.js', format: 'cjs', sourcemap: true
     }],
     plugins: [nodeResolve(), style(), templ(), typescript(), sourcemaps()],
     external: ['bacom', 'tehanu', '@prantlf/dom-lite/global']
@@ -184,7 +180,7 @@ export class GreetMeElement extends HTMLElement {
   private displayName: HTMLElement
 
   render(): void {
-    this.shadowRoot = 'Hello, <span id=display-name></span>!
+    this.shadowRoot = 'Hello, <span id=display-name></span>!'
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
@@ -193,7 +189,7 @@ export class GreetMeElement extends HTMLElement {
 }
 ```
 
-If you implement the `render` method, it will be called even if you pass the `template` parameter to the `comp` decorator. You can use it to update the Shadom DOM content.
+If you implement the `render` method, it will be called even if you pass the `template` parameter to the `comp` decorator. You can use it to update the Shadow DOM content.
 
 ### SSR
 
@@ -218,7 +214,7 @@ import './components/greetme'
 import suite from 'tehanu'
 import assert from 'assert'
 
-const test = suite('prop')
+const test = suite('greet-me')
 
 test('greets with the specified name', () => {
   const el = document.createElement('greet-me')
