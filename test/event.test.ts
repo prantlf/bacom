@@ -3,7 +3,7 @@ import assert from 'assert'
 import './dom'
 import { comp, event, templ } from '..'
 
-const test = suite('elem')
+const test = suite('event')
 
 @comp({ tag: 'event-component', template: templ('<span id=span></span>') })
 class EventComponent extends HTMLElement {
