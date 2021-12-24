@@ -63,23 +63,23 @@
     "statements": 100
   },
   "dependencies": {
-    "@rollup/pluginutils": "^4.1.0",
-    "clean-css": "^5.1.2",
-    "cssnano": "^5.0.2",
-    "csso": "^4.2.0",
+    "@rollup/pluginutils": "^4.1.2",
+    "clean-css": "^5.2.2",
+    "cssnano": "^5.0.14",
+    "csso": "^5.0.2",
     "html-minifier": "^4.0.0",
-    "htmlnano": "^1.0.0",
-    "postcss": "^8.2.15",
+    "htmlnano": "^1.1.1",
+    "postcss": "^8.4.5",
     "source-map": "^0.7.3"
   },
   "devDependencies": {
-    "@prantlf/dom-lite": "^21.2.8",
+    "@prantlf/dom-lite": "^21.3.0",
     "@prantlf/esbuild": "^0.8.46",
-    "c8": "^7.7.2",
-    "source-map-support": "^0.5.19",
+    "c8": "^7.10.0",
+    "source-map-support": "^0.5.21",
     "tehanu": "^0.0.3",
     "tehanu-repo-coco": "^0.0.2",
-    "typescript": "^4.2.4"
+    "typescript": "^4.5.4"
   },
   "keywords": [
     "web-components",
