@@ -1,22 +1,23 @@
 const { spawn } = require('child_process')
 const { startService } = require('@prantlf/esbuild')
+const less = require('../tools/less/esbuild')
+const sass = require('../tools/sass/esbuild')
 const style = require('../tools/style/esbuild')
 const templ = require('../tools/templ/esbuild')
 
 const task = process.argv[2]
 const prepare = task === 'prepare'
 const watch = task === 'watch'
-const builds = [
-  {
-    entryPoints: ['src/index.ts'],
-    outfile: 'dist/index.js',
-    format: 'cjs',
-    bundle: true
-  }
-]
+const builds = []
 
 if (prepare || task === 'dist' || watch)
   builds.push(
+    {
+      entryPoints: ['src/index.ts'],
+      outfile: 'dist/index.js',
+      format: 'cjs',
+      bundle: true
+    },
     {
       entryPoints: ['src/index.ts'],
       outfile: 'dist/index.esm.js',
@@ -73,7 +74,13 @@ if (task === 'test' || watch)
       outfile: 'test/example/counter.js',
       format: 'esm',
       bundle: true,
-      plugins: [style({ module: '../..' }), templ({ module: '../..' })]
+      minify: true,
+      plugins: [
+        less({ minify: true, module: '../..' }),
+        sass({ minify: true, module: '../..' }),
+        style({ minify: true, module: '../..' }),
+        templ({ minify: true, module: '../..' })
+      ]
     }
   )
 
@@ -87,8 +94,12 @@ async function build() {
 }
 
 function types() {
+  return run (`${__dirname}/types`)
+}
+
+function run(command, args) {
   return new Promise((resolve, reject) => {
-    const proc = spawn(`${__dirname}/types`)
+    const proc = spawn(command, args)
       .on('error', err => (console.error(err), reject()))
       .on('exit', code => code ? reject() : resolve())
     proc.stdout.on('data', data => process.stdout.write(data.toString()))

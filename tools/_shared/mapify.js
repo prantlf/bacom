@@ -1,60 +1,42 @@
-const { SourceMapGenerator } = require('source-map')
+import { SourceMapGenerator } from 'source-map'
 
 function measureSource(source) {
-  const lines = source.split(/\r?\n/g)
+  let lineCount = 1
+  const len = source.length
+  let pos = 0
+  for (let next = 0; pos < len; ++lineCount, pos = next) {
+    next = source.indexOf('\n', pos + 1)
+    if (next < 0) break
+  }
   return {
-    lineCount: lines.length,
-    lastLineLen: lines[lines.length - 1].length
+    lineCount,
+    lastLineLen: len - pos
   }
 }
 
-function startMapping(map, source) {
+export default function mapifyMemo(from, to, source, output) {
+  const map = new SourceMapGenerator({ file: to })
+  map.setSourceContent(from, source)
   map.addMapping({
-    source,
+    source: from,
     original: {
       line: 1,
       column: 0
     },
     generated: {
       line: 2,
-      column: 22
-    },
+      column: 21
+    }
   })
-}
-
-module.exports = function mapifyMemo(from, to, source) {
-  const { lineCount, lastLineLen } = measureSource(source)
-  const map = new SourceMapGenerator({ file: to })
-  startMapping(map, from)
-  map.addMapping({
-    source: from,
-    original: {
-      line: lineCount,
-      column: lastLineLen
-    },
-    generated: {
-      line: lineCount + 1,
-      column: lineCount > 1 ? lastLineLen : 22 + lastLineLen
-    },
-  })
+  let { lineCount, lastLineLen } = measureSource(source)
+  const original = { line: lineCount, column: lastLineLen }
+  if (output !== undefined) {
+    ({ lineCount, lastLineLen } = measureSource(output))
+  }
+  const generated = {
+    line: lineCount + 1,
+    column: lineCount > 1 ? lastLineLen : 22 + lastLineLen
+  }
+  map.addMapping({ source: from, original, generated })
   return map
 }
-
-//   mapifyMiniCss(from, to, orig, mini) {
-//     const { lineCount, lastLineLen } = measureSource(orig)
-//     const map = new SourceMapGenerator({ file: to })
-//     addCssStart(map, from)
-//     map.addMapping({
-//       source: from,
-//       original: {
-//         line: lineCount,
-//         column: lastLineLen
-//       },
-//       generated: {
-//         line: 2,
-//         column: 22 + mini.length
-//       },
-//     })
-//     return map
-//   },
-// }

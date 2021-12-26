@@ -1,11 +1,10 @@
-const { createFilter } = require('@rollup/pluginutils')
-const compileHtml = require('./compile')
-const cachify = require('../_shared/cachify')
+import { createFilter } from '@rollup/pluginutils'
+import compileHtml from './compile'
+import cachify from '../_shared/cachify'
 
 const cache = new Map()
 
-module.exports = function
-templ({ include = ['**/*.html', '**/*.thtml'], exclude, minify, module = 'bacom' } = {}) {
+export default function templ({ include = ['**/*.html', '**/*.thtml'], exclude, minify, module = 'bacom' } = {}) {
   const filter = createFilter(include, exclude)
   return {
     name: 'bacomtempl',

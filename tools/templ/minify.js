@@ -1,5 +1,5 @@
-const { process } = require('htmlnano')
-const { minify } = require('html-minifier');
+import { process } from 'htmlnano'
+import { minify } from 'html-minifier'
 
 async function minifyHtmlNano(content) {
   const { html } = await process(content, {
@@ -34,7 +34,7 @@ function minifyHtmlMinifier(content) {
   })
 }
 
-module.exports = async function minifyCss(content) {
+export default async function minifyCss(content) {
   const [nano, html] = await Promise.all([
     minifyHtmlNano(content), minifyHtmlMinifier(content)
   ])

@@ -1,13 +1,12 @@
-const { readFile } = require('fs/promises')
-const { dirname } = require('path')
-const compileHtml = require('./compile')
-const inlineMap = require('../_shared/inline')
-const cachify = require('../_shared/cachify')
+import { readFile } from 'fs/promises'
+import { dirname } from 'path'
+import compileHtml from './compile'
+import inlineMap from '../_shared/inline'
+import cachify from '../_shared/cachify'
 
 const cache = new Map()
 
-module.exports = function
-templ({ filter = '\\.t?html$', minify, module = 'bacom' } = {}) {
+export default function templ({ filter = '\\.t?html$', minify, module = 'bacom' } = {}) {
   filter = new RegExp(filter)
   return {
     name: 'bacomtempl',

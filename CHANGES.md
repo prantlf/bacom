@@ -1,5 +1,11 @@
 # Changes
 
+## 0.5.0
+
+* Add plugins for LESS and SASS sources.
+* Fix source maps of stylesheets and templates compiled with esbuild.
+* Improve performance of counting lines in source stylesheets and templates.
+
 ## 0.4.0
 
 * Minify CSS and HTML bundled by esbuild and rollup plugins.

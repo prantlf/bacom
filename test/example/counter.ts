@@ -1,9 +1,11 @@
-import { comp, prop, elem, event } from '../../dist'
-import style from './counter.css'
+import { comp, prop, elem, event } from '../../dist/index.esm.js'
+import style1 from './counter.less'
+import style2 from './counter.scss'
+import style3 from './counter.css'
 import template from './counter.thtml'
 import './counter-fonts'
 
-@comp({ tag: 'test-counter', styles: [style], template })
+@comp({ tag: 'test-counter', styles: [style1, style2, style3], template })
 export class CounterElement extends HTMLElement {
   @prop({ type: 'number' })
   public count = 0
@@ -11,7 +13,7 @@ export class CounterElement extends HTMLElement {
   @elem()
   private display: HTMLElement
 
-  private interval: NodeJS.Timeout
+  private interval: ReturnType<typeof setTimeout>
 
   connectedCallback(): void {
     this.start()

@@ -6,5 +6,6 @@ test/comp.test.js
 test/elem.test.js
 test/event.test.js
 test/prop.test.js
-test/example/*.js
+test/example/counter.js
+tools/*/esbuild.js
 *.map

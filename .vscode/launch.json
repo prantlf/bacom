@@ -5,6 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "build",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/index.js",
+      "args": [
+        "test"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "trace": true
+    },
+    {
       "name": "test",
       "type": "node",
       "request": "launch",
@@ -17,6 +30,29 @@
         "${workspaceFolder}/test/elem.test.js",
         "${workspaceFolder}/test/event.test.js",
         "${workspaceFolder}/test/prop.test.js"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "trace": true
+    },
+    {
+      "name": "example-esbuild",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/test/example/build.esbuild",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "trace": true
+    },
+    {
+      "name": "example-rollup",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/rollup/dist/bin/rollup",
+      "args": [
+        "--silent", "-c", "test/example/build.rollup.js"
       ],
       "skipFiles": [
         "<node_internals>/**"

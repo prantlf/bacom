@@ -1,6 +1,4 @@
 :host {
-  --font-family: Pacifico;
-  --font-size: 1rem;
   font-family: var(--font-family);
   font-size: var(--font-size);
 }
