@@ -1,4 +1,4 @@
-const { readFile, writeFile } = require('fs/promises')
+const { readFile } = require('fs/promises')
 const postcss = require('postcss')
 const cssnano = require('cssnano')
 const CleanCSS = require('clean-css')

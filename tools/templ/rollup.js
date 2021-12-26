@@ -9,8 +9,8 @@ export default function templ({ include = ['**/*.html', '**/*.thtml'], exclude, 
   return {
     name: 'bacomtempl',
     transform(source, id) {
-      return filter(id) && cachify(cache, `${id}:${minify}`, async () => {
-        const { code, map } = await compileHtml(id, source, minify, module)
+      return filter(id) && cachify(cache, `${id}:${minify}`, () => {
+        const { code, map } = compileHtml(id, source, minify, module)
         return { code, map: map.toJSON() }
       })
     }

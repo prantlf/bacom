@@ -14,7 +14,7 @@ export default function templ({ filter = '\\.t?html$', minify, module = 'bacom' 
       build.onLoad({ filter }, async ({ path }) =>
         cachify(cache, `${path}:${minify}`, async () => {
           const source = await readFile(path, 'utf8')
-          const { code, map } = await compileHtml(path, source, minify, module)
+          const { code, map } = compileHtml(path, source, minify, module)
           const contents = `${code}
 ${inlineMap(map)}`
           return { contents, resolveDir: dirname(path) }
