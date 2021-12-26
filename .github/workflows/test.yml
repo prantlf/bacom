@@ -1,14 +1,8 @@
 name: Test
 
 on:
-  push:
-    branches:
-    - master
-  pull_request:
-    types:
-    - opened
-    - reopened
-    - synchronize
+  - push
+  - pull_request
 
 jobs:
   test:
@@ -17,10 +11,10 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 14
-      - uses: pnpm/action-setup@v2.0.1
+          node-version: 'lts/*'
+      - uses: pnpm/action-setup@v2
         with:
-          version: '>=5'
+          version: '>=6'
           run_install: |
-            - args: [--frozen-lockfile, --no-verify-store-integrity]
+            - args: [--no-optional, --frozen-lockfile, --no-verify-store-integrity]
       - run: npm test
