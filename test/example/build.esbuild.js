@@ -14,9 +14,9 @@ build({
   sourcemap: true,
   minify,
   plugins: [
-    less({ minify, module: '../..' }),
-    sass({ minify, module: '../..' }),
-    style({ minify, module: '../..' }),
-    templ({ minify, module: '../..' })
+    less({ minify, module: '../../dist/index.esm.js' }),
+    sass({ minify, module: '../../dist/index.esm.js' }),
+    style({ minify, module: '../../dist/index.esm.js' }),
+    templ({ minify, module: '../../dist/index.esm.js' })
   ]
 }).catch(() => process.exitCode = 1)

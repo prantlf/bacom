@@ -1,6 +1,6 @@
 {
   "name": "bacom",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Basic library for writing web components.",
   "homepage": "https://github.com/prantlf/bacom#readme",
   "author": {
@@ -43,7 +43,9 @@
     "watch": "node build watch",
     "precheck": "node build test",
     "check": "node -r source-map-support/register test",
-    "example": "node test/example/build.esbuild && rollup -c test/example/build.rollup.js",
+    "example": "npm run example:esbuild && npm run example:rollup",
+    "example:esbuild": "node test/example/build.esbuild",
+    "example:rollup": "rollup -c test/example/build.rollup.js",
     "precoverage": "node build test",
     "coverage": "c8 node -r source-map-support/register test && NO_CONSTRUCTIBLE_STYLESHEETS=1 c8 --no-clean node -r source-map-support/register test/comp.test && c8 report -r text-summary && c8 check-coverage",
     "test": "npm run example && npm run coverage",

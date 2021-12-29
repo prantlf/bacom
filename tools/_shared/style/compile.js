@@ -17,7 +17,7 @@ export default async function compileCss(path, source, map, minify, module) {
   }
   const code = `import { style } from '${module}'
 export default style(\`${escapeTaggedTemplate(css)}\`)`
-  const scripted = mapifyMemo(name, `${name}.js`, css)
+  const scripted = mapifyMemo(name, `${name}.js`, 'style', css)
   if (minified) {
     await SourceMapConsumer.with(minified, null,
       consumer => scripted.applySourceMap(consumer))

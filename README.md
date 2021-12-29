@@ -86,7 +86,7 @@ pnpm i -D bacom
 If you do not want to bundle this package in your build output, you can load it separately on your web page before your script bundle:
 
 ```html
-<script src=https://unpkg.com/bacom@0.5.0/dist/index.umd.min.js></script>
+<script src=https://unpkg.com/bacom@0.5.1/dist/index.umd.min.js></script>
 <script src=yours/index.js></script>
 ```
 

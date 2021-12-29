@@ -8,6 +8,6 @@ export default function compileHtml(path, source, minify, module) {
   const html = minify ? minifyHtml(source) : source
   const code = `import { templ } from '${module}'
 export default templ(\`${escapeTaggedTemplate(html)}\`)`
-  const map = mapifyMemo(name, `${name}.js`, source, minify ? html : undefined)
+  const map = mapifyMemo(name, `${name}.js`, 'templ', source, minify ? html : undefined)
   return { code, map }
 }

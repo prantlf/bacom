@@ -6,21 +6,24 @@ let content
 
 function bySplit() {
   const lines = content.split(/\n/g)
-  return lines.length
+  return { lineCount: lines.length, lastLineLen: lines[lines.length - 1].length }
 }
 
 function bySearch() {
-  let count = 1
-  for (let len = content.length, pos = 0, next; pos < len; ++count, pos = next) {
+  let lineCount = 1
+  const len = content.length
+  let pos = 0
+  for (let next; pos < len; ++lineCount, pos = next) {
     next = content.indexOf('\n', pos + 1)
     if (next < 0) break
   }
-  return count
+  return { lineCount, lastLineLen: len - pos - 1 }
 }
 
 async function countLines() {
   content = await readFile(`${__dirname}/_shared/bootstrap.css`, 'utf8')
-  equal(bySplit(), bySearch())
+  equal(bySplit().lineCount, bySearch().lineCount)
+  equal(bySplit().lastLineLen, bySearch().lastLineLen)
   createSuite('Counting lines in a string...')
     .add('by splitting', bySplit)
     .add('by searching', bySearch)

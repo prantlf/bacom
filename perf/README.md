@@ -3,6 +3,9 @@
 ## Count Lines
 
     Counting lines in a string...
+      by splitting x 2,219 ops/sec ±1.10% (89 runs sampled)
+      by searching x 4,307 ops/sec ±0.56% (89 runs sampled)
+    Counting lines in a string...
       by splitting x 2,341 ops/sec ±1.46% (90 runs sampled)
       by searching x 4,275 ops/sec ±0.77% (90 runs sampled)
 

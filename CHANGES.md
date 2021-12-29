@@ -1,5 +1,9 @@
 # Changes
 
+## 0.5.1
+
+* Fix stack trace of source maps for stylesheets and templates.
+
 ## 0.5.0
 
 * Add plugins for LESS and SASS sources.
