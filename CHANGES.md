@@ -1,5 +1,9 @@
 # Changes
 
+## 0.6.0
+
+* Add webpack loaders to support webpack users.
+
 ## 0.5.1
 
 * Fix stack trace of source maps for stylesheets and templates.

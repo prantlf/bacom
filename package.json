@@ -1,6 +1,6 @@
 {
   "name": "bacom",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Basic library for writing web components.",
   "homepage": "https://github.com/prantlf/bacom#readme",
   "author": {
@@ -37,15 +37,19 @@
     "tools"
   ],
   "scripts": {
+    "symlinks": "ln -rsf dist test/example/dist && ln -rsf tools build/tools",
     "plugins": "rollup -c build/plugins.rollup.js",
-    "prepare": "npm run plugins && node build prepare",
+    "plugins:esbuild": "node build/plugins.esbuild.js",
+    "plugins:webpack": "webpack -c build/plugins.webpack.js",
+    "prepare": "npm run symlinks && npm run plugins && node build prepare",
     "build": "node build dist",
     "watch": "node build watch",
     "precheck": "node build test",
     "check": "node -r source-map-support/register test",
-    "example": "npm run example:esbuild && npm run example:rollup",
+    "example": "npm run example:esbuild && npm run example:webpack && npm run example:rollup",
     "example:esbuild": "node test/example/build.esbuild",
     "example:rollup": "rollup -c test/example/build.rollup.js",
+    "example:webpack": "webpack -c test/example/build.webpack.js",
     "precoverage": "node build test",
     "coverage": "c8 node -r source-map-support/register test && NO_CONSTRUCTIBLE_STYLESHEETS=1 c8 --no-clean node -r source-map-support/register test/comp.test && c8 report -r text-summary && c8 check-coverage",
     "test": "npm run example && npm run coverage",
@@ -71,6 +75,7 @@
     "@rollup/pluginutils": "^4.1.2",
     "csso": "^5.0.2",
     "html-minifier": "^4.0.0",
+    "loader-utils": "^3.2.0",
     "source-map": "^0.7.3"
   },
   "devDependencies": {
@@ -87,8 +92,12 @@
     "source-map-support": "^0.5.21",
     "tehanu": "^0.0.3",
     "tehanu-repo-coco": "^0.0.2",
+    "ts-loader": "^9.2.6",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-node-externals": "^3.0.0"
   },
   "optionalDependencies": {
     "benchmark": "^2.1.4",

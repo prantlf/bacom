@@ -9,14 +9,15 @@ const makeAllPackagesExternal = {
 }
 
 const targets = ['less', 'sass', 'style', 'templ']
-const builds = targets.map(target => ({
-  entryPoints: [`tools/${target}/esbuild.src.js`],
-  outfile: `tools/${target}/esbuild.js`,
+const plugins = ['esbuild', 'webpack']
+const builds = targets.map(target => plugins.map(plugin => ({
+  entryPoints: [`tools/${target}/${plugin}.src.js`],
+  outfile: `tools/${target}/${plugin}.js`,
   format: 'cjs',
   platform: 'node',
   bundle: true,
   sourcemap: true,
   plugins: [makeAllPackagesExternal]
-}))
+}))).flat()
 
 Promise.all(builds.map(build)).catch(() => process.exitCode = 1)

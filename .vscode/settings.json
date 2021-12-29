@@ -4,7 +4,9 @@
     "**/.DS_Store": true,
     "**/coverage": true,
     "**/*.map": true,
-    "**/pnpm-lock.yaml": true
+    "**/pnpm-lock.yaml": true,
+    "build/tools": true,
+    "test/example/dist": true
   },
   "search.exclude": {
     "**/dist": true,
@@ -13,6 +15,7 @@
     "test/event.test.js": true,
     "test/prop.test.js": true,
     "test/example/counter.js": true,
-    "tools/*/esbuild.js": true
+    "tools/*/esbuild.js": true,
+    "tools/*/webpack.js": true
   }
 }

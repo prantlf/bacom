@@ -102,7 +102,7 @@ The following features are implemented:
 * Applying common styles by constructible stylesheets or `style` elements.
 * Setting an child element to a property using an ID or an selector.
 * Listening to an event on the host element or on a child element.
-* Building with plugins for `esbuild` and `rollup` to transform `css`, `less`, `scss` and `html` files to functions returning `CSSStylesheet` and `HTMLTemplateElement`, including memoization for the best performance.
+* Building with plugins for `esbuild`, `rollup` and `webpack` to transform `css`, `less`, `scss` and `html` files to functions returning `CSSStylesheet` and `HTMLTemplateElement`, including memoization for the best performance.
 
 ### Build
 
@@ -124,7 +124,7 @@ yarn add -D less
 pnpm i -D less
 ```
 
-Plugins for [Rollup]:
+Plugins for [rollup]:
 
 * `bacom/tools/less/rollup`: compiles LESS sources to a string with CSS; parameters (include, exclude, minify, options)
 * `bacom/tools/sass/rollup`: compiles SASS sources to a string with CSS; parameters (include, exclude, minify, options)
@@ -209,6 +209,66 @@ Plugin parameters:
 | minify  | boolean | minify the output stylesheet                                                 |
 | options | object  | the [`options` parameter] for the [`less` compiler] or the [`sass` compiler] |
 
+Plugins for [webpack]:
+
+* `bacom/tools/less/webpack`: compiles LESS sources to a string with CSS; parameters (minify, options)
+* `bacom/tools/sass/webpack`: compiles SASS sources to a string with CSS; parameters (minify, options)
+* `bacom/tools/style/webpack`: compiles a CSS source to a string; parameters (minify)
+* `bacom/tools/templ/webpack`: compiles a HTML source to a string; parameters (minify)
+
+```js
+const path = require('path')
+const nodeExternals = require('webpack-node-externals')
+
+export default [
+  {
+    entry: './src/index.ts',
+    output: {
+      filename: 'index.min.js',
+      path: path.resolve(__dirname, 'dist'),
+      module: true,
+      library: { type: 'module' }
+    },
+    mode: 'production',
+    devtool: 'source-map',
+    experiments: { outputModule: true },
+    module: {
+      rules: [
+        { test: /\.ts$/, use: 'ts-loader' },
+        { test: /\.css$/, use: 'bacom/tools/style/webpack.js' },
+        { test: /\.t?html$/, use: 'bacom/tools/templ/webpack.js' }
+      ]
+    }
+  },
+  {
+    entry: 'test/index.ts',
+    output: {
+      filename: 'index.js',
+      path: path.resolve(__dirname, 'test'),
+      library: { type: 'commonjs' }
+    },
+    mode: 'development',
+    devtool: 'eval-source-map',
+    module: {
+      rules: [
+        { test: /\.ts$/, use: 'ts-loader' },
+        { test: /\.css$/, use: 'bacom/tools/style/webpack.js' },
+        { test: /\.t?html$/, use: 'bacom/tools/templ/webpack.js' }
+      ]
+    },
+    externalsPresets: { node: true },
+    externals: [nodeExternals()]
+  }
+]
+```
+
+Plugin parameters:
+
+| Name    | Type     | Description                                                                  |
+| ------- | -------- | ---------------------------------------------------------------------------- |
+| minify  | boolean  | minify the output stylesheet (`true` by default if `mode === 'production'`)  |
+| options | object   | the [`options` parameter] for the [`less` compiler] or the [`sass` compiler] |
+
 ### Custom Rendering
 
 If you do not pass a template as a parameter to the `comp` decorator, you can implement the `render` method to populate the shadow DOM yourself. You will still be able to use the decorators `elem` and `event` and refer to the Shadow DOM content.
@@ -279,8 +339,9 @@ Copyright (c) 2021 Ferdinand Prantl
 Licensed under the MIT license.
 
 [@prantlf/dom-lite]: https://github.com/prantlf/dom-lite#readme
-[Rollup]: https://rollupjs.org/
+[rollup]: https://rollupjs.org/
 [esbuild]: https://esbuild.github.io/
+[webpack]: https://webpack.js.org/
 [`options` parameter]: https://sass-lang.com/documentation/js-api/interfaces/Options
 [`less` compiler]: https://lesscss.org/usage/#programmatic-usage
 [`sass` compiler]: https://sass-lang.com/documentation/js-api

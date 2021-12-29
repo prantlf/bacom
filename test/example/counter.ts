@@ -1,9 +1,9 @@
-import { comp, prop, elem, event } from '../../dist/index.esm.js'
+import { comp, prop, elem, event } from './dist/index.esm.js'
 import style1 from './counter.less'
 import style2 from './counter.scss'
 import style3 from './counter.css'
 import template from './counter.thtml'
-import './counter-fonts'
+import './counter-fonts.ts'
 
 @comp({ tag: 'test-counter', styles: [style1, style2, style3], template })
 export class CounterElement extends HTMLElement {

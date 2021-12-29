@@ -8,7 +8,7 @@ export default async function compileCss(path, source, map, minify, module) {
   const name = basename(path)
   let css, minified
   if (minify) {
-    ({ css, map: minified } = await minifyCss(name, source))
+    ({ css, map: minified } = minifyCss(name, source))
     minified = minified.toJSON()
     minified.sources = [name]
     minified.file = `${name}.min`
