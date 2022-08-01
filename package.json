@@ -37,7 +37,7 @@
     "tools"
   ],
   "scripts": {
-    "symlinks": "ln -rsf dist test/example/dist && ln -rsf tools build/tools",
+    "symlinks": "ln -sf ../../dist test/example/dist && ln -sf ../tools build/tools",
     "plugins": "rollup -c build/plugins.rollup.js",
     "plugins:esbuild": "node build/plugins.esbuild.js",
     "plugins:webpack": "webpack -c build/plugins.webpack.js",
@@ -72,41 +72,41 @@
     "statements": 100
   },
   "dependencies": {
-    "@rollup/pluginutils": "^4.1.2",
-    "csso": "^5.0.2",
+    "@rollup/pluginutils": "^4.2.1",
+    "csso": "^5.0.4",
     "html-minifier": "^4.0.0",
     "loader-utils": "^3.2.0",
-    "source-map": "^0.7.3"
+    "source-map": "^0.7.4"
   },
   "devDependencies": {
     "@prantlf/dom-lite": "^21.3.0",
     "@prantlf/esbuild": "^0.8.46",
-    "@rollup/plugin-typescript": "^8.3.0",
-    "c8": "7.10.0",
-    "esbuild": "^0.14.14",
-    "less": "^4.1.2",
-    "rollup": "^2.66.1",
+    "@rollup/plugin-typescript": "^8.3.4",
+    "c8": "7.12.0",
+    "esbuild": "^0.14.51",
+    "less": "^4.1.3",
+    "rollup": "^2.77.2",
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-terser": "^7.0.2",
-    "sass": "^1.49.0",
+    "sass": "^1.54.0",
     "source-map-support": "^0.5.21",
-    "tehanu": "^0.1.0",
-    "tehanu-repo-coco": "^0.0.2",
-    "ts-loader": "^9.2.6",
-    "tslib": "^2.3.1",
-    "typescript": "^4.5.5",
-    "webpack": "^5.67.0",
-    "webpack-cli": "^4.9.2",
+    "tehanu": "^1.0.1",
+    "tehanu-repo-coco": "^1.0.0",
+    "ts-loader": "^9.3.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
     "webpack-node-externals": "^3.0.0"
   },
   "optionalDependencies": {
     "benchmark": "^2.1.4",
-    "clean-css": "^5.2.4",
+    "clean-css": "^5.3.1",
     "crass": "^0.12.3",
-    "cssnano": "^5.0.16",
-    "htmlnano": "^2.0.0",
-    "postcss": "^8.4.5",
-    "terser": "^5.10.0"
+    "cssnano": "^5.1.12",
+    "htmlnano": "^2.0.2",
+    "postcss": "^8.4.14",
+    "terser": "^5.14.2"
   },
   "keywords": [
     "web-components",
