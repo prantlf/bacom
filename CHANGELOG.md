@@ -1,4 +1,14 @@
-# Changes
+# [1.0.0](https://github.com/prantlf/bacom/compare/v0.6.0...v1.0.0) (2023-03-27)
+
+### Bug Fixes
+
+* Support ES and CJS build scripts properly ([693e2c3](https://github.com/prantlf/bacom/commit/693e2c39137f5c3a938da0c053106c393d426fd7))
+* Upgrade dependencies ([c432a3a](https://github.com/prantlf/bacom/commit/c432a3a86c9a47c464d6aa75237ad0ebf4e1b892))
+
+### BREAKING CHANGES
+
+* The minimum supported version of Node.js increased from 12 to 16.14.
+* CJS variants of build plugins don't have the extension '.js' any more. Require them with no extension, just like you import them in ES scripts.
 
 ## 0.6.0
 
