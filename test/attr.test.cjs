@@ -1,7 +1,7 @@
 const test = require('tehanu')('attr')
 const assert = require('assert')
-require('./dom')
-const { attr } = require('..')
+require('./dom.cjs')
+const { attr } = require('../dist/index.cjs')
 
 test('remove an attribute', () => {
   const el = document.createElement('div')

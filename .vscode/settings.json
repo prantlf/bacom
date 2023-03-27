@@ -10,12 +10,11 @@
   },
   "search.exclude": {
     "**/dist": true,
-    "test/comp.test.js": true,
-    "test/elem.test.js": true,
-    "test/event.test.js": true,
-    "test/prop.test.js": true,
+    "test/comp.test.cjs": true,
+    "test/elem.test.cjs": true,
+    "test/event.test.cjs": true,
+    "test/prop.test.cjs": true,
     "test/example/counter.js": true,
-    "tools/*/esbuild.js": true,
-    "tools/*/webpack.js": true
+    "tools/**/*.cjs": true
   }
 }

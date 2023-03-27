@@ -1,6 +1,6 @@
 import { createFilter } from '@rollup/pluginutils'
-import compileCss from '../_shared/style/compile'
-import cachify from '../_shared/cachify'
+import compileCss from '../_shared/style/compile.js'
+import cachify from '../_shared/cachify.js'
 
 const cache = new Map()
 

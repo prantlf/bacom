@@ -1,8 +1,8 @@
 import { SourceMapConsumer } from 'source-map'
 import { basename } from 'path'
-import minifyCss from './minify'
-import mapifyMemo from '../mapify'
-import escapeTaggedTemplate from '../escape'
+import minifyCss from './minify.js'
+import mapifyMemo from '../mapify.js'
+import escapeTaggedTemplate from '../escape.js'
 
 export default async function compileCss(path, source, map, minify, module) {
   const name = basename(path)

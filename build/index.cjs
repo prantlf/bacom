@@ -1,49 +1,45 @@
 const { spawn } = require('child_process')
 const { startService } = require('@prantlf/esbuild')
-const less = require('../tools/less/esbuild')
-const sass = require('../tools/sass/esbuild')
-const style = require('../tools/style/esbuild')
-const templ = require('../tools/templ/esbuild')
+const less = require('../tools/less/esbuild.cjs')
+const sass = require('../tools/sass/esbuild.cjs')
+const style = require('../tools/style/esbuild.cjs')
+const templ = require('../tools/templ/esbuild.cjs')
 
 const task = process.argv[2]
 const prepare = task === 'prepare'
 const watch = task === 'watch'
 const builds = []
+const bundle = true
+const minify = true
 
 if (prepare || task === 'dist' || watch)
   builds.push(
     {
       entryPoints: ['src/index.ts'],
-      outfile: 'dist/index.js',
+      outfile: 'dist/index.cjs',
       format: 'cjs',
-      bundle: true
+      bundle
     },
     {
       entryPoints: ['src/index.ts'],
-      outfile: 'dist/index.esm.js',
+      outfile: 'dist/index.js',
       format: 'esm',
-      bundle: true
+      bundle
     },
     {
       entryPoints: ['src/index.ts'],
       outfile: 'dist/index.esm.min.js',
       format: 'esm',
-      bundle: true,
-      minify: true
-    },
-    {
-      entryPoints: ['src/index.ts'],
-      outfile: 'dist/index.umd.js',
-      format: 'umd',
-      globalName: 'bacom'
+      bundle,
+      minify
     },
     {
       entryPoints: ['src/index.ts'],
       outfile: 'dist/index.umd.min.js',
       format: 'umd',
       globalName: 'bacom',
-      bundle: true,
-      minify: true
+      bundle,
+      minify
     }
   )
 
@@ -51,35 +47,35 @@ if (task === 'test' || watch)
   builds.push(
     {
       entryPoints: ['test/comp.test.ts'],
-      outfile: 'test/comp.test.js',
+      outfile: 'test/comp.test.cjs',
       format: 'cjs'
     },
     {
       entryPoints: ['test/elem.test.ts'],
-      outfile: 'test/elem.test.js',
+      outfile: 'test/elem.test.cjs',
       format: 'cjs'
     },
     {
       entryPoints: ['test/event.test.ts'],
-      outfile: 'test/event.test.js',
+      outfile: 'test/event.test.cjs',
       format: 'cjs'
     },
     {
       entryPoints: ['test/prop.test.ts'],
-      outfile: 'test/prop.test.js',
+      outfile: 'test/prop.test.cjs',
       format: 'cjs'
     },
     {
       entryPoints: ['test/example/counter.ts'],
       outfile: 'test/example/counter.js',
       format: 'esm',
-      bundle: true,
-      minify: true,
+      bundle,
+      minify,
       plugins: [
-        less({ minify: true, module: '../..' }),
-        sass({ minify: true, module: '../..' }),
-        style({ minify: true, module: '../..' }),
-        templ({ minify: true, module: '../..' })
+        less({ minify, module: '../..' }),
+        sass({ minify, module: '../..' }),
+        style({ minify, module: '../..' }),
+        templ({ minify, module: '../..' })
       ]
     }
   )

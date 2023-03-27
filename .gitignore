@@ -3,12 +3,11 @@ build/tools
 coverage
 dist
 node_modules
-test/comp.test.js
-test/elem.test.js
-test/event.test.js
-test/prop.test.js
+test/comp.test.cjs
+test/elem.test.cjs
+test/event.test.cjs
+test/prop.test.cjs
 test/example/counter.js
 test/example/dist
-tools/*/esbuild.js
-tools/*/webpack.js
+tools/**/*.cjs
 *.map

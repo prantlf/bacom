@@ -9,10 +9,10 @@ const makeAllPackagesExternal = {
 }
 
 const targets = ['less', 'sass', 'style', 'templ']
-const plugins = ['esbuild', 'webpack']
+const plugins = ['esbuild', 'rollup', 'webpack']
 const builds = targets.map(target => plugins.map(plugin => ({
-  entryPoints: [`tools/${target}/${plugin}.src.js`],
-  outfile: `tools/${target}/${plugin}.js`,
+  entryPoints: [`tools/${target}/${plugin}.js`],
+  outfile: `tools/${target}/${plugin}.cjs`,
   format: 'cjs',
   platform: 'node',
   bundle: true,

@@ -1,6 +1,6 @@
 import suite from 'tehanu'
 import assert from 'assert'
-import './dom'
+import './dom.cjs'
 import { comp, elem, templ } from '..'
 
 const test = suite('elem')

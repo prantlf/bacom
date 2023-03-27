@@ -1,0 +1,7 @@
+require('./attr.test.cjs')
+require('./dasherize.test.cjs')
+require('./eventize.test.cjs')
+require('./comp.test.cjs')
+require('./elem.test.cjs')
+require('./event.test.cjs')
+require('./prop.test.cjs')

@@ -1,7 +1,6 @@
 ## Base for Web Components (bacom)
 
 [![NPM version](https://badge.fury.io/js/bacom.png)](http://badge.fury.io/js/bacom)
-[![Build Status](https://github.com/prantlf/bacom/workflows/Test/badge.svg)](https://github.com/prantlf/bacom/actions)
 [![Dependency Status](https://david-dm.org/prantlf/bacom.svg)](https://david-dm.org/prantlf/bacom)
 [![devDependency Status](https://david-dm.org/prantlf/bacom/dev-status.svg)](https://david-dm.org/prantlf/bacom#info=devDependencies)
 
@@ -134,31 +133,21 @@ Plugins for [rollup]:
 ```js
 import typescript from '@rollup/plugin-typescript'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-import { terser } from 'rollup-plugin-terser'
+import { minify } from 'rollup-plugin-swc-minify'
 import sourcemaps from 'rollup-plugin-sourcemaps'
 import style from 'bacom/tools/style/rollup'
 import templ from 'bacom/tools/templ/rollup'
 
-export default [
-  {
-    input: 'src/index.ts',
-    output: [{
-      file: 'dist/index.min.js', format: 'esm', sourcemap: true
-    }],
-    plugins: [
-      nodeResolve(), style({ minify: true }), templ({ minify: true }),
-      typescript(), sourcemaps(), terser()
-    ]
-  },
-  {
-    input: 'test/index.ts',
-    output: [{
-      file: 'test/index.js', format: 'cjs', sourcemap: true
-    }],
-    plugins: [nodeResolve(), style(), templ(), typescript(), sourcemaps()],
-    external: ['bacom', 'tehanu', '@prantlf/dom-lite/global']
-  }
-]
+export default {
+  input: 'src/index.ts',
+  output: [{
+    file: 'dist/index.min.js', format: 'iife', sourcemap: true
+  }],
+  plugins: [
+    nodeResolve(), style({ minify: true }), templ({ minify: true }),
+    typescript(), sourcemaps(), minify()
+  ]
+}
 ```
 
 Plugin parameters:
@@ -186,14 +175,8 @@ const targets = [
   {
     entryPoints: ['src/index.ts'],
     outfile: 'dist/index.min.js',
-    format: 'esm', sourcemap: true, bundle: true, minify: true,
+    format: 'iife', sourcemap: true, bundle: true, minify: true,
     plugins: [style({ minify: true }), templ({ minify: true })]
-  },
-  {
-    entryPoints: ['test/index.test.ts'],
-    outfile: 'test/index.test.js',
-    format: 'cjs', sourcemap: true, bundle: true, platform: 'node',
-    external: ['bacom', 'tehanu', '@prantlf/dom-lite']
   }
 ]
 
@@ -227,37 +210,17 @@ export default [
       filename: 'index.min.js',
       path: path.resolve(__dirname, 'dist'),
       module: true,
-      library: { type: 'module' }
+      library: { type: 'iife' }
     },
     mode: 'production',
     devtool: 'source-map',
-    experiments: { outputModule: true },
     module: {
       rules: [
         { test: /\.ts$/, use: 'ts-loader' },
-        { test: /\.css$/, use: 'bacom/tools/style/webpack.js' },
-        { test: /\.t?html$/, use: 'bacom/tools/templ/webpack.js' }
+        { test: /\.css$/, use: 'bacom/tools/style/webpack' },
+        { test: /\.t?html$/, use: 'bacom/tools/templ/webpack' }
       ]
     }
-  },
-  {
-    entry: 'test/index.ts',
-    output: {
-      filename: 'index.js',
-      path: path.resolve(__dirname, 'test'),
-      library: { type: 'commonjs' }
-    },
-    mode: 'development',
-    devtool: 'eval-source-map',
-    module: {
-      rules: [
-        { test: /\.ts$/, use: 'ts-loader' },
-        { test: /\.css$/, use: 'bacom/tools/style/webpack.js' },
-        { test: /\.t?html$/, use: 'bacom/tools/templ/webpack.js' }
-      ]
-    },
-    externalsPresets: { node: true },
-    externals: [nodeExternals()]
   }
 ]
 ```
@@ -334,7 +297,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## License
 
-Copyright (c) 2021 Ferdinand Prantl
+Copyright (c) 2021-2023 Ferdinand Prantl
 
 Licensed under the MIT license.
 

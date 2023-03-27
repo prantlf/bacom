@@ -1,4 +1,4 @@
-import compileHtml from './compile'
+import compileHtml from './compile.js'
 
 export default function templ(content, noMap, meta) {
   let loaderOptions = this.getOptions({

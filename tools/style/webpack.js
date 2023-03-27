@@ -1,5 +1,5 @@
 import { urlToRequest } from 'loader-utils'
-import compileCss from '../_shared/style/compile'
+import compileCss from '../_shared/style/compile.js'
 
 export default function templ(content, map, meta) {
   let loaderOptions = this.getOptions({

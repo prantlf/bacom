@@ -1,7 +1,7 @@
 import { basename } from 'path'
-import minifyHtml from './minify'
-import mapifyMemo from '../_shared/mapify'
-import escapeTaggedTemplate from '../_shared/escape'
+import minifyHtml from './minify.js'
+import mapifyMemo from '../_shared/mapify.js'
+import escapeTaggedTemplate from '../_shared/escape.js'
 
 export default function compileHtml(path, source, minify, module) {
   const name = basename(path)

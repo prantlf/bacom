@@ -3,6 +3,6 @@
 set -e
 #set -x
 
-./node_modules/.bin/tsc --target es2019 --experimentalDecorators \
+./node_modules/.bin/tsc --target es2022 --experimentalDecorators \
   --emitDeclarationOnly --declaration --declarationDir dist src/index.ts
 rm dist/memoize.d.ts

@@ -1,7 +1,7 @@
 const test = require('tehanu')('dasherize')
 const assert = require('assert')
-require('./dom')
-const { dasherize } = require('..')
+require('./dom.cjs')
+const { dasherize } = require('../dist/index.cjs')
 
 test('a single word', () => {
   assert.strictEqual(dasherize('test'), 'test')

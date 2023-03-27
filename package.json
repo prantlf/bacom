@@ -25,37 +25,78 @@
   "engines": {
     "node": ">=12"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "browser": {
     "dist/index.js": "dist/index.umd.min.js",
     "dist/index.esm.js": "dist/index.esm.min.js"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "browser": "./dist/index.umd.min.js"
+    },
+    "./tools/less/esbuild": {
+      "require": "./tools/less/esbuild.cjs",
+      "import": "./tools/less/esbuild.js"
+    },
+    "./tools/sass/esbuild": {
+      "require": "./tools/sass/esbuild.cjs",
+      "import": "./tools/sass/esbuild.js"
+    },
+    "./tools/style/esbuild": {
+      "require": "./tools/style/esbuild.cjs",
+      "import": "./tools/style/esbuild.js"
+    },
+    "./tools/templ/esbuild": {
+      "require": "./tools/templ/esbuild.cjs",
+      "import": "./tools/templ/esbuild.js"
+    },
+    "./tools/less/rollup": {
+      "require": "./tools/less/rollup.cjs",
+      "import": "./tools/less/rollup.js"
+    },
+    "./tools/sass/rollup": {
+      "require": "./tools/sass/rollup.cjs",
+      "import": "./tools/sass/rollup.js"
+    },
+    "./tools/style/rollup": {
+      "require": "./tools/style/rollup.cjs",
+      "import": "./tools/style/rollup.js"
+    },
+    "./tools/templ/rollup": {
+      "require": "./tools/templ/rollup.cjs",
+      "import": "./tools/templ/rollup.js"
+    }
   },
   "files": [
     "dist",
     "tools"
   ],
   "scripts": {
-    "symlinks": "ln -sf ../../dist test/example/dist && ln -sf ../tools build/tools",
+    "symlinks": "ln-j -nsf ../../dist test/example/dist && ln-j -nsf ../tools build/tools",
     "plugins": "rollup -c build/plugins.rollup.js",
     "plugins:esbuild": "node build/plugins.esbuild.js",
     "plugins:webpack": "webpack -c build/plugins.webpack.js",
-    "prepare": "npm run symlinks && npm run plugins && node build prepare",
-    "build": "node build dist",
-    "watch": "node build watch",
-    "precheck": "node build test",
-    "check": "node -r source-map-support/register test",
+    "produce": "npm run symlinks && npm run plugins && node build/index.cjs prepare",
+    "build": "node build/index.cjs dist",
+    "watch": "node build/index.cjs watch",
+    "precheck": "node build/index.cjs test",
+    "check": "node -r source-map-support/register test/index.cjs",
     "example": "npm run example:esbuild && npm run example:webpack && npm run example:rollup",
-    "example:esbuild": "node test/example/build.esbuild",
+    "example:esbuild": "node test/example/build.esbuild.cjs",
     "example:rollup": "rollup -c test/example/build.rollup.js",
-    "example:webpack": "webpack -c test/example/build.webpack.js",
-    "precoverage": "node build test",
-    "coverage": "c8 node -r source-map-support/register test && NO_CONSTRUCTIBLE_STYLESHEETS=1 c8 --no-clean node -r source-map-support/register test/comp.test && c8 report -r text-summary && c8 check-coverage",
+    "example:webpack": "webpack -c test/example/build.webpack.cjs",
+    "precoverage": "node build/index.cjs test",
+    "coverage": "c8 node -r source-map-support/register test/index.cjs && NO_CONSTRUCTIBLE_STYLESHEETS=1 c8 --no-clean node -r source-map-support/register test/comp.test.cjs && c8 report -r text-summary && c8 check-coverage",
     "test": "npm run example && npm run coverage",
-    "start": "python -m SimpleHTTPServer"
+    "start": "python3 -m http.server"
   },
   "c8": {
+    "100": true,
     "extension": [
       ".ts"
     ],
@@ -65,11 +106,7 @@
     ],
     "reporter": [
       "lcov"
-    ],
-    "branches": 100,
-    "lines": 100,
-    "functions": 100,
-    "statements": 100
+    ]
   },
   "dependencies": {
     "@rollup/pluginutils": "^4.2.1",
@@ -82,12 +119,13 @@
     "@prantlf/dom-lite": "^21.3.0",
     "@prantlf/esbuild": "^0.8.46",
     "@rollup/plugin-typescript": "^8.3.4",
+    "@unixcompat/ln.js": "2.0.2",
     "c8": "7.12.0",
     "esbuild": "^0.14.51",
     "less": "^4.1.3",
     "rollup": "^2.77.2",
     "rollup-plugin-sourcemaps": "^0.6.3",
-    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-swc-minify": "^1.0.5",
     "sass": "^1.54.0",
     "source-map-support": "^0.5.21",
     "tehanu": "^1.0.1",
@@ -98,15 +136,6 @@
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "webpack-node-externals": "^3.0.0"
-  },
-  "optionalDependencies": {
-    "benchmark": "^2.1.4",
-    "clean-css": "^5.3.1",
-    "crass": "^0.12.3",
-    "cssnano": "^5.1.12",
-    "htmlnano": "^2.0.2",
-    "postcss": "^8.4.14",
-    "terser": "^5.14.2"
   },
   "keywords": [
     "web-components",
