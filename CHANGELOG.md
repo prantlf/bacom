@@ -1,5 +1,18 @@
 # Changes
 
+## [2.0.0](https://github.com/prantlf/bacom/compare/v1.0.0...v2.0.0) (2024-04-06)
+
+### Features
+
+* Remove support for style elements, retain only constructible stylesheets ([6883934](https://github.com/prantlf/bacom/commit/688393448407819664db11fbac9ecb7055612ca3))
+
+### BREAKING CHANGES
+
+Styles for web components are assigned only via
+constructible stylesheets now. All browsers support the modern interface
+in the meanwhile. The function `style` returns only `CSSStyleSheet`. The
+boolean flag `constructibleStyleSheets` is not exported any more.
+
 ## [1.0.0](https://github.com/prantlf/bacom/compare/v0.6.0...v1.0.0) (2023-03-27)
 
 ### Bug Fixes
