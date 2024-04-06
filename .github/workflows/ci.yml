@@ -1,35 +1,41 @@
 name: Test or Release
 
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - '**'
+    paths-ignore:
+      - '**/*.md'
+      - LICENSE
+  pull_request:
 
 jobs:
   test-or-release:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Checkout Sources
-      uses: actions/checkout@v3
-    - name: Install Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 'lts/*'
-        registry-url: 'https://registry.npmjs.org'
+      uses: actions/checkout@v4
     - name: Install PNPM
       uses: pnpm/action-setup@v2
       with:
         version: latest
-        run_install: |
-          - args: [--frozen-lockfile, --no-verify-store-integrity]
+    - name: Install Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 'lts/*'
+        registry-url: 'https://registry.npmjs.org'
+    - name: Install Dependencies
+      run: pnpm i --frozen-lockfile --no-verify-store-integrity
     - name: Build
       run: npm run produce
     - name: Test
       run: npm test
     - name: Publish
-      uses: cycjimmy/semantic-release-action@v3
+      uses: prantlf/publish-release-action@v1
       with:
-        semantic_version: 19
-        branches: master
+        no-archives: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
