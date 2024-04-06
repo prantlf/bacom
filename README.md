@@ -6,7 +6,7 @@
 
 Basic library for writing lightweight web components. Suitable for low-level web components in UI libraries. Ensures standard behaviour of custom elements with shadow DOM efficiently.
 
-* Tiny size - 2.34 kB minified, 1.15 kB gzipped, 1 kB brotlied.
+* Tiny size - 2.19 kB minified, 1.1 kB gzipped, 963 B brotlied.
 * Consumable as ESM, UMD and CJS modules.
 * Zero dependencies.
 * Written in TypeScript.
