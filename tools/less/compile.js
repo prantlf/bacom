@@ -1,6 +1,8 @@
 import { basename } from 'path'
-import { render } from 'less'
+import less from 'less'
 import compileCss from '../_shared/style/compile.js'
+
+const { render } = less
 
 export default async function compileLess(path, source, minify, options = {}, module) {
   const name = basename(path)

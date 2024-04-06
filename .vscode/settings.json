@@ -2,8 +2,9 @@
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,
-    "**/coverage": true,
     "**/*.map": true,
+    "**/coverage": true,
+    "**/node_modules": true,
     "**/pnpm-lock.yaml": true,
     "build/tools": true,
     "test/example/dist": true
