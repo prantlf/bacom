@@ -98,7 +98,7 @@ The following features are implemented:
 * Registering of the custom element with the provided tag name.
 * Synchronising values of a properties and attributes (reflection).
 * Rendering the shadow DOM content from a template.
-* Applying common styles by constructible stylesheets or `style` elements.
+* Applying common styles by constructible stylesheets.
 * Setting an child element to a property using an ID or an selector.
 * Listening to an event on the host element or on a child element.
 * Building with plugins for `esbuild`, `rollup` and `webpack` to transform `css`, `less`, `scss` and `html` files to functions returning `CSSStylesheet` and `HTMLTemplateElement`, including memoization for the best performance.

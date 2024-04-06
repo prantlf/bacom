@@ -1,5 +1,3 @@
-import { constructibleStyleSheets } from './style'
-
 export const children = Symbol('children')
 export const events = Symbol('events')
 export const created = Symbol('created')
@@ -56,11 +54,8 @@ export function comp({ tag, styles, template }: Comp): any {
   let stylesheets: Style[]
 
   function applyStyle(shadowRoot: ShadowRoot): void {
-    if (constructibleStyleSheets)
-      (shadowRoot as any).adoptedStyleSheets = stylesheets ||
-        (stylesheets = styles.map(style => style() as CSSStyleSheet))
-    else
-      for (const style of styles) appendClone(shadowRoot, style() as HTMLStyleElement)
+    (shadowRoot as any).adoptedStyleSheets = stylesheets ||
+      (stylesheets = styles.map(style => style()))
   }
 
   return <T extends new(...args: any[]) => CustomElement>(ctor: T) => {

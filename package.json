@@ -91,7 +91,7 @@
     "example:rollup": "rollup -c test/example/build.rollup.js",
     "example:webpack": "webpack -c test/example/build.webpack.cjs",
     "precoverage": "node build/index.cjs test",
-    "coverage": "c8 node -r source-map-support/register test/index.cjs && NO_CONSTRUCTIBLE_STYLESHEETS=1 c8 --no-clean node -r source-map-support/register test/comp.test.cjs && c8 report -r text-summary && c8 check-coverage",
+    "coverage": "c8 node -r source-map-support/register test/index.cjs && c8 --no-clean node -r source-map-support/register test/comp.test.cjs && c8 report -r text-summary && c8 check-coverage",
     "test": "npm run example && npm run coverage",
     "start": "python3 -m http.server"
   },
