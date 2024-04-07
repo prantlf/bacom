@@ -1,5 +1,11 @@
 # Changes
 
+## [3.1.0](https://github.com/prantlf/bacom/compare/v3.0.0...v3.1.0) (2024-04-07)
+
+### Features
+
+* Call createdCallback after finishing the component creation ([60b5c38](https://github.com/prantlf/bacom/commit/60b5c38ffd7844cca24a33979df81781129e3899))
+
 ## [3.0.0](https://github.com/prantlf/bacom/compare/v2.2.0...v3.0.0) (2024-04-07)
 
 ### Features
