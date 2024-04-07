@@ -1,5 +1,11 @@
 # Changes
 
+## [2.2.0](https://github.com/prantlf/bacom/compare/v2.1.0...v2.2.0) (2024-04-07)
+
+### Features
+
+* Allow disabling reflection from property to attribute ([7552af6](https://github.com/prantlf/bacom/commit/7552af64869f8f9180afd0dde2a57c31ea0f400e))
+
 ## [2.1.0](https://github.com/prantlf/bacom/compare/v2.0.0...v2.1.0) (2024-04-07)
 
 ### Features
