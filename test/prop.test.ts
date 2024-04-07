@@ -18,6 +18,9 @@ class PropComponent extends HTMLElement {
 
   @prop({ type: 'string' })
   dashedName
+
+  @prop({ type: 'string', reflect: false })
+  noReflect
 }
 
 test('assigns an empty string to a string by default', () => {
@@ -40,7 +43,7 @@ test('assigns a default value to a dasherized attribute', () => {
   assert.strictEqual(el.dashedName, '')
 })
 
-test('does not reflect defalut property values to attributes', async () => {
+test('does not reflect default property values to attributes', async () => {
   const el = document.createElement('prop-component')
   assert.strictEqual(el.outerHTML, '<prop-component></prop-component>')
 })
@@ -49,6 +52,18 @@ test('reflects a new property value to the attribute', async () => {
   const el = document.createElement('prop-component') as PropComponent
   el.string = 'test'
   assert.strictEqual(el.outerHTML, '<prop-component string="test"></prop-component>')
+})
+
+test('reflects a property value to the dasherized attribute', async () => {
+  const el = document.createElement('prop-component') as PropComponent
+  el.dashedName = 'test'
+  assert.strictEqual(el.outerHTML, '<prop-component dashed-name="test"></prop-component>')
+})
+
+test('does not reflect a property value to the attribute if reflection disabled', async () => {
+  const el = document.createElement('prop-component') as PropComponent
+  el.noReflect = 'test'
+  assert.strictEqual(el.outerHTML, '<prop-component></prop-component>')
 })
 
 test('converts a number to string when reflecting the value to the attribute', async () => {

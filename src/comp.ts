@@ -16,14 +16,14 @@ export interface CustomElement extends HTMLElement {
 declare type Style = HTMLStyleElement | CSSStyleSheet
 
 export interface ElemDecl {
-  id: string
-  sel: string
+  id?: string
+  sel?: string
 }
 
 export interface EventDecl {
-  name: string
-  id: string
-  sel: string
+  name?: string
+  id?: string
+  sel?: string
 }
 
 export interface Comp {

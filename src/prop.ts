@@ -6,6 +6,7 @@ export type Value = boolean | number | string
 
 export interface Prop {
   type: Type
+  reflect?: boolean
 }
 
 const defaults = {
@@ -34,7 +35,7 @@ const converters: { [key: string]: Converter } = {
 type PropContainer = { [key in symbol]: Value }
 type Prototype = { constructor: CustomElement }
 
-export function prop({ type }: Prop): any {
+export function prop({ type, reflect }: Prop): any {
   return (proto: Prototype, name: string): {} => {
     const propName = Symbol(name)
     const attrName = dasherize(name)
@@ -62,7 +63,7 @@ export function prop({ type }: Prop): any {
         const newValue = convert(value)
         if (oldValue !== newValue) {
           (this as PropContainer)[propName] = newValue
-          if ((this as CustomElement)[created]) attr(this, attrName, value)
+          if (reflect !== false && (this as CustomElement)[created]) attr(this, attrName, value)
         }
       }
     }
