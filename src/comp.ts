@@ -10,6 +10,7 @@ export interface CustomElement extends HTMLElement {
   [attr2prop]: { [key: string]: string }
   observedAttributes?: string[]
   render?(): void
+  createdCallback?(): void
   attributeChangedCallback?(name: string, oldValue: string, newValue: string): void
 }
 
@@ -74,6 +75,7 @@ export function comp({ tag, styles, template }: Comp = {}): any {
         pickElements.call(this, childEls, shadowRoot)
         startListening.call(this, evts, shadowRoot)
         this[created] = true
+        if (super.createdCallback) super.createdCallback()
       }
 
       attributeChangedCallback(name: string, oldValue: string, newValue: string): void {

@@ -15,6 +15,10 @@ export class CounterElement extends HTMLElement {
 
   private interval: ReturnType<typeof setTimeout>
 
+  createdCallback(): void {
+    this.display.textContent = String(this.count)
+  }
+
   connectedCallback(): void {
     this.start()
   }

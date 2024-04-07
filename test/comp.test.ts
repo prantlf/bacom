@@ -6,7 +6,13 @@ import { comp, style, templ } from '..'
 const test = suite('comp')
 
 @comp({ tag: 'empty-component' })
-class EmptyComponent extends HTMLElement {}
+class EmptyComponent extends HTMLElement {
+  created
+
+  createdCallback() {
+    this.created = true
+  }
+}
 
 @comp()
 class UntaggedComponent extends HTMLElement {}
@@ -31,6 +37,11 @@ test('renders an empty shadow dom by default', async () => {
   const el = document.createElement('empty-component')
   assert.strictEqual(el.outerHTML, '<empty-component></empty-component>')
   assert.strictEqual(el.shadowRoot.firstChild, null)
+})
+
+test('calls createdCallback', async () => {
+  const el = document.createElement('empty-component') as EmptyComponent
+  assert.ok(el.created)
 })
 
 test('accepts declarative shadow dom', async () => {
