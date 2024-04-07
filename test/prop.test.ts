@@ -7,19 +7,19 @@ const test = suite('prop')
 
 @comp({ tag: 'prop-component' })
 class PropComponent extends HTMLElement {
-  @prop({ type: 'string' })
+  @prop({ type: 'string', reflect: true })
   string
 
-  @prop({ type: 'number' })
+  @prop({ type: 'number', reflect: true })
   number
 
-  @prop({ type: 'boolean' })
+  @prop({ type: 'boolean', reflect: true })
   boolean
 
-  @prop({ type: 'string' })
+  @prop({ type: 'string', reflect: true })
   dashedName
 
-  @prop({ type: 'string', reflect: false })
+  @prop({ type: 'string' })
   noReflect
 }
 

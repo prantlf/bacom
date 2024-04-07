@@ -63,7 +63,7 @@ export function prop({ type, reflect }: Prop): any {
         const newValue = convert(value)
         if (oldValue !== newValue) {
           (this as PropContainer)[propName] = newValue
-          if (reflect !== false && (this as CustomElement)[created]) attr(this, attrName, value)
+          if (reflect && (this as CustomElement)[created]) attr(this, attrName, value)
         }
       }
     }

@@ -29,7 +29,7 @@ import style from './style.css'
 @comp({ tag: 'greet-me', styles: [style], template })
 export class GreetMeElement extends HTMLElement {
   // reflects a property to an attribute and back, watches for changes
-  @prop({ type: 'string' })
+  @prop({ type: 'string', reflect: true })
   public name: string
 
   // pins an element with the ID `display-name` in the rendered content
@@ -96,7 +96,7 @@ All named exports are available in the global object `bacom`.
 The following features are implemented:
 
 * Registering of the custom element with the provided tag name.
-* Synchronising values of a properties and attributes (reflection).
+* Optionally synchronising values of a properties and attributes (reflection).
 * Rendering the shadow DOM content from a template.
 * Applying common styles by constructible stylesheets.
 * Setting an child element to a property using an ID or an selector.
