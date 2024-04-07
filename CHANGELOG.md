@@ -1,5 +1,15 @@
 # Changes
 
+## [2.1.0](https://github.com/prantlf/bacom/compare/v2.0.0...v2.1.0) (2024-04-07)
+
+### Features
+
+* Allow abstract custom elements without a tag name ([e3be144](https://github.com/prantlf/bacom/commit/e3be144bfe18bf781fa4a74abc34b9ce0a83b0da))
+
+### Bug Fixes
+
+* Fix reflecting property values from dasherized attributes to properties ([14306a5](https://github.com/prantlf/bacom/commit/14306a565f6239daeecfd787eadf4e44ca8aeccd))
+
 ## [2.0.0](https://github.com/prantlf/bacom/compare/v1.0.0...v2.0.0) (2024-04-06)
 
 ### Features
