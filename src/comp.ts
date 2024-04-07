@@ -1,11 +1,13 @@
 export const children = Symbol('children')
 export const events = Symbol('events')
 export const created = Symbol('created')
+export const attr2prop = Symbol('attr2prop')
 
 export interface CustomElement extends HTMLElement {
   [created]: boolean
   [children]: { [key: string]: ElemDecl }
   [events]: { [key: string]: EventDecl }
+  [attr2prop]: { [key: string]: string }
   observedAttributes?: string[]
   render?(): void
   attributeChangedCallback?(name: string, oldValue: string, newValue: string): void
@@ -75,7 +77,7 @@ export function comp({ tag, styles, template }: Comp): any {
       }
 
       attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
-        if (oldValue !== newValue) (this as any)[name] = newValue;
+        if (oldValue !== newValue) (this as any)[attrs[name]] = newValue;
         if (super.attributeChangedCallback) super.attributeChangedCallback(name, oldValue, newValue)
       }
     }
@@ -83,6 +85,7 @@ export function comp({ tag, styles, template }: Comp): any {
     const { prototype } = Comp
     const childEls = prototype[children] || (prototype[children] = {})
     const evts = prototype[events] || (prototype[events] = {})
+    const attrs = prototype[attr2prop] || (prototype[attr2prop] = {})
 
     customElements.define(tag, Comp)
 

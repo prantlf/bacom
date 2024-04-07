@@ -1,4 +1,4 @@
-import { created, CustomElement } from './comp'
+import { created, attr2prop, CustomElement } from './comp'
 import { attr, dasherize } from './attr'
 
 export type Type = 'boolean' | 'number' | 'string'
@@ -42,6 +42,8 @@ export function prop({ type }: Prop): any {
     const { constructor: ctor } = proto
     const observedAttrs = ctor.observedAttributes || (ctor.observedAttributes = [])
     observedAttrs.push(attrName)
+    const attrs = proto[attr2prop] || (proto[attr2prop] = {})
+    attrs[attrName] = name
 
     proto[propName] = defaults[type]
 

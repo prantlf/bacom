@@ -15,6 +15,9 @@ class PropComponent extends HTMLElement {
 
   @prop({ type: 'boolean' })
   boolean
+
+  @prop({ type: 'string' })
+  dashedName
 }
 
 test('assigns an empty string to a string by default', () => {
@@ -30,6 +33,11 @@ test('assigns zero to a number by default', () => {
 test('assigns false to a boolean by default', () => {
   const el = document.createElement('prop-component') as PropComponent
   assert.strictEqual(el.boolean, false)
+})
+
+test('assigns a default value to a dasherized attribute', () => {
+  const el = document.createElement('prop-component') as PropComponent
+  assert.strictEqual(el.dashedName, '')
 })
 
 test('does not reflect defalut property values to attributes', async () => {
@@ -65,6 +73,12 @@ test('reflects the attribute value to a property', async () => {
   const el = document.createElement('prop-component') as PropComponent
   el.setAttribute('string', 'test')
   assert.strictEqual(el.string, 'test')
+})
+
+test('reflects the dasherized attribute value to a property', async () => {
+  const el = document.createElement('prop-component') as PropComponent
+  el.setAttribute('dashed-name', 'test')
+  assert.strictEqual(el.dashedName, 'test')
 })
 
 test('converts other type to string for a string property', async () => {
