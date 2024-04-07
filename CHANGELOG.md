@@ -1,5 +1,20 @@
 # Changes
 
+## [3.0.0](https://github.com/prantlf/bacom/compare/v2.2.0...v3.0.0) (2024-04-07)
+
+### Features
+
+* Reflect property to attribute only if enabled ([ced480e](https://github.com/prantlf/bacom/commit/ced480e3c87fd81f078dc0a87515068f7d7e09d5))
+
+### BREAKING CHANGES
+
+The default value of the `reflect` flag has changed to
+`false`. Properties do not reflect their values to attributes
+automatically. The default roles of attributes is to initialize
+properties, not necessarily to always contain the same value. If you
+need to always synchronize the value of a property and an attribute, set
+the flag `reflect` to `true` explocitly in the property declaration.
+
 ## [2.2.0](https://github.com/prantlf/bacom/compare/v2.1.0...v2.2.0) (2024-04-07)
 
 ### Features
