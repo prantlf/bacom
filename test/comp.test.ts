@@ -8,6 +8,9 @@ const test = suite('comp')
 @comp({ tag: 'empty-component' })
 class EmptyComponent extends HTMLElement {}
 
+@comp()
+class UntaggedComponent extends HTMLElement {}
+
 test('ensures an open shadow dom', () => {
   const el = document.createElement('empty-component')
   assert.ok(el.shadowRoot instanceof ShadowRoot)
@@ -17,6 +20,11 @@ test('ensures an open shadow dom', () => {
 test('registers the custom element', () => {
   const El = customElements.get('empty-component')
   assert.strictEqual(El, EmptyComponent)
+})
+
+test('does not registers a custom element without a tag', () => {
+  const el = new UntaggedComponent()
+  assert.strictEqual(null, el.tagName)
 })
 
 test('renders an empty shadow dom by default', async () => {

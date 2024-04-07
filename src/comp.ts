@@ -27,7 +27,7 @@ export interface EventDecl {
 }
 
 export interface Comp {
-  tag: string
+  tag?: string
   styles?: Array<() => Style>
   template?: () => HTMLTemplateElement
 }
@@ -51,7 +51,7 @@ function startListening(events: { [key: string]: EventDecl }, shadowRoot: Shadow
   }
 }
 
-export function comp({ tag, styles, template }: Comp): any {
+export function comp({ tag, styles, template }: Comp = {}): any {
   const styleCount = styles ? styles.length : 0
   let stylesheets: Style[]
 
@@ -87,7 +87,7 @@ export function comp({ tag, styles, template }: Comp): any {
     const evts = prototype[events] || (prototype[events] = {})
     const attrs = prototype[attr2prop] || (prototype[attr2prop] = {})
 
-    customElements.define(tag, Comp)
+    if (tag) customElements.define(tag, Comp)
 
     return Comp
   }
